@@ -9,11 +9,12 @@ function AiChatBox() {
     const chatbox_ref = useRef();
 
 
-
+    // yuvalllllllll
     const onSendMessage = async(onclikc_function) => {
         if(textarea_ref.current.value == "")
             return;
     
+            
         const message_output = user_output_ref.current.cloneNode(true);
         message_output.style.display = "flex";
         message_output.textContent = textarea_ref.current.value

@@ -1,8 +1,9 @@
 import OpenAI from "openai";
 import { useState } from "react";
+import axios from 'axios';
 import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
 import raw from '../ai-description.txt';
-const API_KEY = "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";
+const API_KEY = process.env.API_KEY;
 
 const openai = new OpenAI({
   apiKey: API_KEY,
@@ -12,11 +13,20 @@ const openai = new OpenAI({
 function Ai() {
   const [content, setcontent] = useState();
   let messageList = [];
+  const read = async () =>{
+   const data = await axios.get(raw);
+   setcontent(data);
+  }
+  read().catch;
+
+    
+  /*
   fetch(raw)
     .then(r => r.text())
     .then(text => {
       setcontent(text);
 });
+*/
 
 
 
