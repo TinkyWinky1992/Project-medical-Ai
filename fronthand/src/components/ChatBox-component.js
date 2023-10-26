@@ -9,7 +9,7 @@ function AiChatBox() {
     const chatbox_ref = useRef();
 
 
-    // yuvalllllllll
+    // yuva2222
     const onSendMessage = async(onclikc_function) => {
         if(textarea_ref.current.value == "")
             return;
