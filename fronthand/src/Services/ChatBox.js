@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { scrollingDown } from "../utils/ChatUtil";
-import Ai from "./Ai-component";
+import Ai from "./Ai";
 function AiChatBox() {
     const ai = new Ai();
     const user_output_ref = useRef();

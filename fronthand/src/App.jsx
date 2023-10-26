@@ -1,6 +1,6 @@
 
-import RenderChatbox from './Pages/ChatBoxWithAi';
-import RenderLogin from './Pages/Login';
+import RenderChatbox from './Components/ChatBoxWithAi';
+import RenderLogin from './Components/Login';
 function App() {
   // yuval
       

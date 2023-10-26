@@ -1,5 +1,5 @@
 import '../style/chatboxStyle.css'
-import AiChatBox from '../components/ChatBox-component';
+import AiChatBox from '../Services/ChatBox';
 import * as React from 'react';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Button from '@mui/material/Button';

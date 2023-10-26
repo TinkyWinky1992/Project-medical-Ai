@@ -3,7 +3,9 @@ import { useState } from "react";
 import axios from 'axios';
 import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
 import raw from '../ai-description.txt';
-const API_KEY = process.env.API_KEY;
+
+const API_KEY = "";
+
 
 const openai = new OpenAI({
   apiKey: API_KEY,
