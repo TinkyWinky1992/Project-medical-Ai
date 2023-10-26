@@ -1,0 +1,22 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build artifacts
+dist/
+out/
+build/
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.*.local
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+
+# Ignore log files
+*.log
+
+# Ignore npm-specific files
+package-lock.json

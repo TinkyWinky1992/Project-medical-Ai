@@ -1,0 +1,51 @@
+import { useRef } from "react";
+import { scrollingDown } from "../utils/ChatUtil";
+import Ai from "./Ai-component";
+function AiChatBox() {
+    const ai = new Ai();
+    const user_output_ref = useRef();
+    const ai_output_ref = useRef();
+    const textarea_ref = useRef();
+    const chatbox_ref = useRef();
+
+
+
+    const onSendMessage = async(onclikc_function) => {
+        if(textarea_ref.current.value == "")
+            return;
+    
+        const message_output = user_output_ref.current.cloneNode(true);
+        message_output.style.display = "flex";
+        message_output.textContent = textarea_ref.current.value
+            
+        chatbox_ref.current.appendChild(message_output)
+        textarea_ref.current.value = "";
+
+        let should_scroll = chatbox_ref.current.scrollTop + chatbox_ref.current.clientHeight === chatbox_ref.current.scrollHeight;
+        if(!should_scroll)
+            scrollingDown(chatbox_ref);
+
+        ai.AichatRespone(onclikc_function, ai_output_ref, message_output, chatbox_ref)
+    };
+
+    
+    
+    return {
+        chatbox_ref:chatbox_ref,
+
+        ai_output_ref: ai_output_ref,
+        user_output_ref: user_output_ref,
+        
+        textarea_ref: textarea_ref,
+
+        //functions
+        onSendMessage: onSendMessage
+    }
+    
+}
+
+
+
+
+
+export default AiChatBox;
