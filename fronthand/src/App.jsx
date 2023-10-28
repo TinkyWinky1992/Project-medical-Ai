@@ -1,6 +1,6 @@
 
 import RenderChatbox from './Components/ChatBoxWithAi';
-import RenderLogin from './Components/Login';
+import Render from './Components/EnterUser';
 function App() {
   // yuval
       
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <RenderLogin />
+        <Render  />
       </header>
     </div>
   );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
 import raw from '../ai-description.txt';
 
-const API_KEY = "";
+const API_KEY = "sk-qC7VKFMSssHcu4lpWLSqT3BlbkFJ64DGlPKibRqUkNK6eR5wF";
 
 
 const openai = new OpenAI({
@@ -19,7 +19,9 @@ function Ai() {
    const data = await axios.get(raw);
    setcontent(data);
   }
-  read().catch;
+  read().catch(error => {
+    console.log("Someting goes worng when reading description file")
+  });
 
     
   /*
