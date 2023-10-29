@@ -1,8 +1,8 @@
 import '../style/LoginStyle.css';
-import { TextField } from '@mui/material';
-import React, { useState} from 'react';
+import { TextField,  } from '@mui/material';
+import React, { useState, forwardRef, useImperativeHandle} from 'react';
 
-const InputEmailField =() =>{
+const InputEmailField =forwardRef((props, ref) =>{
     const [inputUserValue, setInputUserValue] = useState('');
     const [isValid, setIsValid] = useState(true);
 
@@ -10,10 +10,11 @@ const InputEmailField =() =>{
         const newValue = event.target.value;
         setInputUserValue(newValue);
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    
         setIsValid (emailRegex.test(newValue));
     };
-
+    useImperativeHandle(ref, () => ({
+      error: isValid,
+    }));
     return (
         <TextField
           InputLabelProps={{className: "userfield"}}
@@ -28,9 +29,9 @@ const InputEmailField =() =>{
           helperText={!isValid ? 'Invalid input' : ''}
         />
     );
-}
+});
 
-const InputUsernameField =() =>{
+const InputUsernameField = forwardRef((props, ref) =>{
     const [inputUserValue, setInputUserValue] = useState('');
     const [isValid, setIsValid] = useState(true);
 
@@ -41,6 +42,9 @@ const InputUsernameField =() =>{
     
         setIsValid (usernameRegex.test(newValue));
     };
+    useImperativeHandle(ref, () => ({
+      error: isValid,
+    }));
 
     return (
         <TextField
@@ -56,10 +60,9 @@ const InputUsernameField =() =>{
           helperText={!isValid ? 'Invalid input' : ''}
         />
     );
-}
+});
 
-
-const InputEmailOrUsernameField =() =>{
+const InputEmailOrUsernameField = forwardRef((props, ref) =>{
     const [inputUserValue, setInputUserValue] = useState('');
     const [isValid, setIsValid] = useState(true);
   
@@ -73,12 +76,15 @@ const InputEmailOrUsernameField =() =>{
   
       setIsValid(usernameRegex.test(newValue) || emailRegex.test(newValue));
     };
-  
+
+    useImperativeHandle(ref, () => ({
+      error: isValid,
+    }));
     return (
       <TextField
-        InputLabelProps={{className: "userfield"}}
+        InputLabelProps={{ className: "userfield" }}
         label="Enter Username or Email"
-        style={{padding: 10}}
+        style={{ padding: 10 }}
         fullWidth
         variant="outlined"
         value={inputUserValue}
@@ -88,9 +94,9 @@ const InputEmailOrUsernameField =() =>{
         helperText={!isValid ? 'Invalid input' : ''}
       />
     );
-  };
+  });
 
-  const InputPasswordField =() =>{
+  const InputPasswordField =forwardRef((props, ref) =>{
     const [inputPassValue, setInputPassValue] = useState('');
     const [isValid, setIsValid] = useState(true);
 
@@ -100,6 +106,9 @@ const InputEmailOrUsernameField =() =>{
         const passwordRegex = /^[a-zA-Z0-9_-]+$/;
         setIsValid(passwordRegex.test(isValid));
     }
+    useImperativeHandle(ref, () => ({
+      error: isValid,
+    }));
     return (
         <TextField
           type='password'
@@ -116,5 +125,6 @@ const InputEmailOrUsernameField =() =>{
         />
       
       );
-  }
+  });
+
   export {InputEmailOrUsernameField, InputPasswordField, InputEmailField, InputUsernameField}

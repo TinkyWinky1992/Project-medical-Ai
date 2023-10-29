@@ -4,7 +4,7 @@ import axios from 'axios';
 import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
 import raw from '../ai-description.txt';
 
-const API_KEY = "sk-qC7VKFMSssHcu4lpWLSqT3BlbkFJ64DGlPKibRqUkNK6eR5wF";
+const API_KEY = "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";
 
 
 const openai = new OpenAI({
@@ -15,6 +15,7 @@ const openai = new OpenAI({
 function Ai() {
   const [content, setcontent] = useState();
   let messageList = [];
+  /*
   const read = async () =>{
    const data = await axios.get(raw);
    setcontent(data);
@@ -23,14 +24,14 @@ function Ai() {
     console.log("Someting goes worng when reading description file")
   });
 
-    
-  /*
+    */
+  
   fetch(raw)
     .then(r => r.text())
     .then(text => {
       setcontent(text);
 });
-*/
+
 
 
 

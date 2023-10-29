@@ -11,6 +11,11 @@ import logo from '../giphy.gif';
     const switch_btns = useRef();
     const loginBtn = useRef();
     const registerBtn = useRef();
+
+    useEffect(() => {
+      login.current.style.display = 'block';
+      register.current.style.display = 'none';
+    }, []);
   
     const moveToLogin = () => {
       switch_btns.current.style.left = '0';
@@ -27,12 +32,7 @@ import logo from '../giphy.gif';
       login.current.style.display = 'none';
       register.current.style.display = 'block';
     };
-  
-    useEffect(() => {
-      login.current.style.display = 'block';
-      register.current.style.display = 'none';
-    }, []);
-  
+
     return (
       <div className="login-register">
         <div ref={switch_btns} className="btns"></div>
