@@ -14,6 +14,7 @@ const InputEmailField =forwardRef((props, ref) =>{
     };
     useImperativeHandle(ref, () => ({
       error: isValid,
+      text: inputUserValue,
     }));
     return (
         <TextField
