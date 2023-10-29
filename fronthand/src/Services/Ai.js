@@ -4,7 +4,7 @@ import axios from 'axios';
 import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
 import raw from '../ai-description.txt';
 
-const API_KEY = "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";
+const API_KEY = " ";
 
 
 const openai = new OpenAI({
