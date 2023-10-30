@@ -4,7 +4,7 @@ import axios from 'axios';
 import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
 import raw from '../ai-description.txt';
 
-const API_KEY = " ";
+const API_KEY = "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";
 
 
 const openai = new OpenAI({
@@ -36,7 +36,6 @@ function Ai() {
 
 
   const generateText = async (userInput) => {
-
     const userMessage = { role: "user", content: userInput.textContent };
     messageList.push(userMessage);
 
@@ -46,19 +45,26 @@ function Ai() {
       ...messageList, // Include previous responses
    
     ];
-    const chatCompletion = await openai.chat.completions.create({
+      try{
+        const chatCompletion = await openai.chat.completions.create({
   
-      messages: messages,
-      model: 'gpt-3.5-turbo',
+          messages: messages,
+          model: 'gpt-3.5-turbo',
+        
+        });
+        const textAI = chatCompletion.choices[0].message.content;
+        const aiMessage = { role: "assistant", content: textAI };
     
-    });
-    const textAI = chatCompletion.choices[0].message.content;
-    const aiMessage = { role: "assistant", content: textAI };
-
-    messageList.push(aiMessage);
-    console.log(getLevelFromconvirstion(textAI));
-    console.log(getProblemFromconvirstion(textAI));
-    return textAI;
+        messageList.push(aiMessage);
+        console.log(getLevelFromconvirstion(textAI));
+        console.log(getProblemFromconvirstion(textAI));
+        return textAI;
+      }catch (error) {
+        // Handle network or other unexpected errors
+        console.error("An error occurred:", error);
+        return "there is an error"
+      }
+    
   }
 
 

@@ -1,4 +1,5 @@
 
+import './App.css' 
 import RenderChatbox from './Components/ChatBoxWithAi';
 import Render from './Components/EnterUser';
 function App() {
@@ -8,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Render />
+        <RenderChatbox/>
       </header>
     </div>
   );
