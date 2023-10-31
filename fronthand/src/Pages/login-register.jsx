@@ -2,8 +2,8 @@ import "../style/LoginStyle.css";
 import { Grid } from "@mui/material";
 import React, { useRef } from "react";
 import SelectersButtons from "../Components/SelecterButtons";
-import RenderRegister from "./Register";
-import RenderLogin from "./Login";
+import RenderRegister from "../Components/Register";
+import RenderLogin from "../Components/Login";
 import logo from "../giphy.gif";
 
 
