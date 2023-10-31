@@ -2,7 +2,6 @@
   text-align: center;
 }
 
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -13,18 +12,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 .chatbox_container {
-  width: 1000px; 
-  height: 500px; 
+  width: 1000px;
+  height: 500px;
   border-radius: 5px;
   border: 5px solid #3e3e3e;
   overflow: auto;
   display: flex;
   flex-direction: column;
-
-  
 }
-.output_message_ai{
+.output_message_ai {
   display: none;
   max-width: 100%;
   max-height: 100%;
@@ -36,9 +34,8 @@
   font-family: Arial, Helvetica, sans-serif;
   align-self: flex-end;
   text-align: right;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: rgba(249, 249, 249, 0.724);
-
 }
 .output_message_user {
   display: none;
@@ -53,19 +50,16 @@
   align-self: flex-start;
   text-align: left;
   background-color: #4d4b4b7b;
-  color: #ffffff98; 
+  color: #ffffff98;
 }
-
-
-
 
 .textarea_container {
   display: flex;
- 
+
   align-items: center;
   border-radius: 5px;
   padding: 5px;
-  width: 500px; 
+  width: 500px;
 }
 
 textarea {
@@ -83,8 +77,8 @@ textarea {
 }
 .custom-textarea {
   max-height: 200px;
-  width: 100%; 
-  min-height: 70px; 
+  width: 100%;
+  min-height: 70px;
 }
 
 .custom-button {

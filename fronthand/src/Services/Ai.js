@@ -1,11 +1,14 @@
 import OpenAI from "openai";
 import { useState } from "react";
-import axios from 'axios';
-import { scrollingDown, getLevelFromconvirstion, getProblemFromconvirstion } from "../utils/ChatUtil";
-import raw from '../ai-description.txt';
+import axios from "axios";
+import {
+  scrollingDown,
+  getLevelFromconvirstion,
+  getProblemFromconvirstion,
+} from "../utils/ChatUtil";
+import raw from "../ai-description.txt";
 
 const API_KEY = " ";
-
 
 const openai = new OpenAI({
   apiKey: API_KEY,
@@ -25,15 +28,12 @@ function Ai() {
   });
 
     */
-  
+
   fetch(raw)
-    .then(r => r.text())
-    .then(text => {
+    .then((r) => r.text())
+    .then((text) => {
       setcontent(text);
-});
-
-
-
+    });
 
   const generateText = async (userInput) => {
     const userMessage = { role: "user", content: userInput.textContent };
@@ -43,30 +43,25 @@ function Ai() {
       { role: "system", content: content },
       userMessage,
       ...messageList, // Include previous responses
-   
     ];
-      try{
-        const chatCompletion = await openai.chat.completions.create({
-  
-          messages: messages,
-          model: 'gpt-3.5-turbo',
-        
-        });
-        const textAI = chatCompletion.choices[0].message.content;
-        const aiMessage = { role: "assistant", content: textAI };
-    
-        messageList.push(aiMessage);
-        console.log(getLevelFromconvirstion(textAI));
-        console.log(getProblemFromconvirstion(textAI));
-        return textAI;
-      }catch (error) {
-        // Handle network or other unexpected errors
-        console.error("An error occurred:", error);
-        return "there is an error"
-      }
-    
-  }
+    try {
+      const chatCompletion = await openai.chat.completions.create({
+        messages: messages,
+        model: "gpt-3.5-turbo",
+      });
+      const textAI = chatCompletion.choices[0].message.content;
+      const aiMessage = { role: "assistant", content: textAI };
 
+      messageList.push(aiMessage);
+      console.log(getLevelFromconvirstion(textAI));
+      console.log(getProblemFromconvirstion(textAI));
+      return textAI;
+    } catch (error) {
+      // Handle network or other unexpected errors
+      console.error("An error occurred:", error);
+      return "there is an error";
+    }
+  };
 
   const AichatRespone = async (e, ai_output, user_output, chatbox) => {
     e.stopPropagation();
@@ -78,15 +73,15 @@ function Ai() {
 
     chatbox.current.appendChild(message_output);
 
-    let should_scroll = chatbox.current.scrollTop + chatbox.current.clientHeight === chatbox.current.scrollHeight;
-    if (!should_scroll)
-      scrollingDown(chatbox);
-  }
+    let should_scroll =
+      chatbox.current.scrollTop + chatbox.current.clientHeight ===
+      chatbox.current.scrollHeight;
+    if (!should_scroll) scrollingDown(chatbox);
+  };
 
   return {
-    AichatRespone: AichatRespone
-  }
+    AichatRespone: AichatRespone,
+  };
 }
 
 export default Ai;
-
