@@ -1,13 +1,13 @@
 import "./App.css";
-import RenderChatbox from "./Components/ChatBoxWithAi";
-import Render from "./Components/EnterUser";
+import RenderChatbox from "./Pages/ChatBoxWithAi";
+import RenderLoginOrRegister from "./Pages/login-register";
 function App() {
   // yuval
 
   return (
     <div className="App">
       <header className="App-header">
-        <Render />
+        <RenderLoginOrRegister />
       </header>
     </div>
   );
