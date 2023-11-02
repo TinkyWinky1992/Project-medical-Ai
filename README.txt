@@ -9,3 +9,6 @@
 4. npm install @mui/material @emotion/react @emotion/styled
 5. npm install @mui/material @mui/styled-engine-sc styled-components
 6. npm install @fontsource/roboto
+
+sql:
+npm add @nestjs/typeorm typeorm mysql2 - 6in backend
