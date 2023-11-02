@@ -1,4 +1,5 @@
 import "../style/LoginStyle.css";
+import alertModal from "./Alert";
 import {
   InputPasswordField,
   InputEmailField,
