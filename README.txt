@@ -5,6 +5,7 @@
 2.4. npm install --save-dev @types/jest
 2.8. npm install --save-dev jest
 3. npm i -g @nestjs/cli
+npm install class-validator class-transformer
 
 4. npm install @mui/material @emotion/react @emotion/styled
 5. npm install @mui/material @mui/styled-engine-sc styled-components
