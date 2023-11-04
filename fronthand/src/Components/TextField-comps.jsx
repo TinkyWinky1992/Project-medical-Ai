@@ -45,6 +45,7 @@ const InputUsernameField = forwardRef((props, ref) => {
   };
   useImperativeHandle(ref, () => ({
     error: isValid,
+    text: inputUserValue,
   }));
 
   return (
@@ -79,6 +80,7 @@ const InputEmailOrUsernameField = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     error: isValid,
+    text: inputUserValue,
   }));
   return (
     <TextField
@@ -108,6 +110,7 @@ const InputPasswordField = forwardRef((props, ref) => {
   };
   useImperativeHandle(ref, () => ({
     error: isValid,
+    text: inputPassValue,
   }));
   return (
     <TextField

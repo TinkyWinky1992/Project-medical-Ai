@@ -12,9 +12,9 @@ import { UserEntite } from './TypeOrm/entities/user';
         port: 3306,
         username: 'root',
         password: 'admin',
-        database: 'usersDatabase',
+        database: 'usersdatabase',
         entities: [ UserEntite ],
-        synchronize: false, }),UserModule],
+        synchronize: true, }),UserModule],
 })
 export class AppModule  implements NestModule {
   configure(consumer: MiddlewareConsumer) {

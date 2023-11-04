@@ -27,7 +27,7 @@ const RenderLogin = () => {
     }
         
     else {
-      await test();
+      console.log("good")
     }
   };
 

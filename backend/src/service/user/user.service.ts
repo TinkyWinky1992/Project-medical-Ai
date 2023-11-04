@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Account } from '../../Dto/Account';
+import { AccountDto } from '../../Dto/AccountDto';
 import { UserEntite } from '../../TypeOrm/entities/user';
 import {InjectRepository } from '@nestjs/typeorm'
-import {Repository} from 'typeorm';
+import { Repository } from 'typeorm';
+import { AccountParam } from '../../types/AccountType';
 
 @Injectable()
 export class UserService {
@@ -11,7 +12,7 @@ export class UserService {
 
     }
     //get user from the data base
-    async getUser(username: string):Promise<Account>{
+    async getUser(username: string):Promise<AccountDto>{
         const user = await this.user_repository.findOne({ where: { username: username } });
 
         if (user) 
@@ -21,23 +22,23 @@ export class UserService {
     }
 
     //creating user and put it in the user repository
-    async createUser(account: Account): Promise<boolean> {
-        const new_user_entite = this.user_repository.create({ ...account });
+    async createUser(accountDetails: AccountParam) {
+        const new_user_entite: any = this.user_repository.create({ ...accountDetails });
+        return this.user_repository.save(new_user_entite);
+    }
+
+    //delete user from database
+    async deleteUser(id: number) {
+      const user = await this.user_repository.find({where:{id: id}})
+
+      if(user[0] != null) 
+        return await this.user_repository.remove(user);
+      else 
+      {
+        console.log("user empty")
+        return {}
+      }
         
-        try {
-            await this.user_repository.save(new_user_entite);
-            const isUserInsert = await this.getUser(account.username); // await the getUser method
-    
-            if (isUserInsert != null) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (error) {
-            // Handle any errors that might occur during save
-            console.error('Error while saving user:', error);
-            return false; // or throw an exception if needed
-        }
     }
     
 }
