@@ -1,13 +1,10 @@
 import "../style/LoginStyle.css";
+import { postUser } from "../Services/ServerHandler";
+import { checkEmailValid, checkUsernameValid, checkPasswordValid} from "../utils/RegisterUtils";
+import { InputPasswordField, InputEmailField, InputUsernameField } from "./TextField-comps";
 import AlertModal from "./Alert";
-import {
-  InputPasswordField,
-  InputEmailField,
-  InputUsernameField,
-} from "./TextField-comps";
 import { Grid, Typography, Button } from "@mui/material";
 import React, { useRef } from "react";
-import { postUser } from "../Services/ServerHandler";
 
 const RenderRegister = () => {
   const input_email_ref = useRef();
@@ -15,20 +12,31 @@ const RenderRegister = () => {
   const input_password_ref = useRef();
   const alert_ref = useRef();
 
+
    const registerInSystem = async () => {
-    if ( input_email_ref.current.text == null || input_username_ref.current.text ==  null || input_password_ref.current.text== null)
+    const validation_email = await checkEmailValid(input_email_ref.current.text);
+    const validation_username = await checkUsernameValid(input_username_ref.current.text);
+    const validation_password = await checkPasswordValid(input_password_ref.current.text);
+
+    if(validation_email != null)
     {
-      alert_ref.current.open();
+      input_email_ref.current.errormsg(validation_email);
+      input_email_ref.current.setValid(false);
       return;
     }
-
-    if ( !input_email_ref.current.error || !input_username_ref.current.error || !input_password_ref.current.error) 
+    else if(validation_username != null) 
     {
-      alert_ref.current.open();
+      input_username_ref.current.errormsg(validation_username);
+      input_username_ref.current.setValid(false);
       return;
+    }
+    else if(validation_password != null) 
+    {
+      input_password_ref.current.errormsg(validation_password);
+      input_password_ref.current.setValid(false);
     }
     else {
-      await postUser(input_username_ref.current.text, input_email_ref.current.text,  input_password_ref.current.text )
+      await postUser(input_username_ref.current.text, input_email_ref.current.text, input_password_ref.current.text);
     }
   };
 

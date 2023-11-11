@@ -6,10 +6,10 @@ export class UserEntite {
     @PrimaryGeneratedColumn({type: 'bigint'})//supporting bigger values
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     username:string;
     
-    @Column()
+    @Column({ unique: true })
     email:string;
 
     @Column()

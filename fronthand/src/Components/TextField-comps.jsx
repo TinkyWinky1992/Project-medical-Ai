@@ -5,6 +5,7 @@ import React, { useState, forwardRef, useImperativeHandle } from "react";
 const InputEmailField = forwardRef((props, ref) => {
   const [inputUserValue, setInputUserValue] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [errormsg, setErrormsg] = useState("Invalid input");
 
   const InputUserHandler = (event) => {
     const newValue = event.target.value;
@@ -12,9 +13,12 @@ const InputEmailField = forwardRef((props, ref) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     setIsValid(emailRegex.test(newValue));
   };
+
   useImperativeHandle(ref, () => ({
     error: isValid,
+    setValid: setIsValid,
     text: inputUserValue,
+    errormsg: setErrormsg,
   }));
   return (
     <TextField
@@ -27,7 +31,7 @@ const InputEmailField = forwardRef((props, ref) => {
       onChange={InputUserHandler}
       error={!isValid}
       color="warning"
-      helperText={!isValid ? "Invalid input" : ""}
+      helperText={!isValid ? errormsg : ""}
     />
   );
 });
@@ -35,17 +39,21 @@ const InputEmailField = forwardRef((props, ref) => {
 const InputUsernameField = forwardRef((props, ref) => {
   const [inputUserValue, setInputUserValue] = useState("");
   const [isValid, setIsValid] = useState(true);
-
+  const [errormsg, setErrormsg] = useState("Invalid input");
+  
   const InputUserHandler = (event) => {
     const newValue = event.target.value;
     setInputUserValue(newValue);
     const usernameRegex = /^[a-zA-Z0-9_-]+$/;
 
     setIsValid(usernameRegex.test(newValue));
+    
   };
   useImperativeHandle(ref, () => ({
     error: isValid,
+    setValid: setIsValid,
     text: inputUserValue,
+    errormsg: setErrormsg,
   }));
 
   return (
@@ -59,7 +67,7 @@ const InputUsernameField = forwardRef((props, ref) => {
       onChange={InputUserHandler}
       error={!isValid}
       color="warning"
-      helperText={!isValid ? "Invalid input" : ""}
+      helperText={!isValid ? errormsg : ""}
     />
   );
 });
@@ -67,6 +75,7 @@ const InputUsernameField = forwardRef((props, ref) => {
 const InputEmailOrUsernameField = forwardRef((props, ref) => {
   const [inputUserValue, setInputUserValue] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [errormsg, setErrormsg] = useState("Invalid input");
 
   const InputUserHandler = (event) => {
     const newValue = event.target.value;
@@ -80,7 +89,9 @@ const InputEmailOrUsernameField = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     error: isValid,
+    setValid: setIsValid,
     text: inputUserValue,
+    errormsg: setErrormsg,
   }));
   return (
     <TextField
@@ -93,7 +104,7 @@ const InputEmailOrUsernameField = forwardRef((props, ref) => {
       onChange={InputUserHandler}
       error={!isValid}
       color="warning"
-      helperText={!isValid ? "Invalid input" : ""}
+      helperText={!isValid ?  errormsg: ""}
     />
   );
 });
@@ -101,6 +112,7 @@ const InputEmailOrUsernameField = forwardRef((props, ref) => {
 const InputPasswordField = forwardRef((props, ref) => {
   const [inputPassValue, setInputPassValue] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [errormsg, setErrormsg] = useState("Invalid input");
 
   const PasswordHandler = (event) => {
     const newValue = event.target.value;
@@ -110,7 +122,9 @@ const InputPasswordField = forwardRef((props, ref) => {
   };
   useImperativeHandle(ref, () => ({
     error: isValid,
+    setValid: setIsValid,
     text: inputPassValue,
+    errormsg: setErrormsg,
   }));
   return (
     <TextField
@@ -124,7 +138,7 @@ const InputPasswordField = forwardRef((props, ref) => {
       onChange={PasswordHandler}
       error={!isValid}
       color="warning"
-      helperText={!isValid ? "Invalid input" : ""}
+      helperText={!isValid ? errormsg: ""}
     />
   );
 });

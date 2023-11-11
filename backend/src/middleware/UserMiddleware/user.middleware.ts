@@ -1,29 +1,30 @@
-import {  NestMiddleware } from '@nestjs/common';
+import {  HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { plainToClass } from 'class-transformer';
-import { validate } from 'class-validator';
-import { UserEntite } from '../../TypeOrm/entities/user';
+import { AccountParam  } from '../../types/AccountType';
+import { UserService } from '../../service/user/user.service';
 
+
+@Injectable()
 export class UserMiddleware implements NestMiddleware {
+  constructor(private readonly userService: UserService ) {
+  }
   async use(req: Request, res: Response, next: NextFunction) {
     console.log(req.body);
-    const userInput = req.body;
-    const validator_errors = await this.validationUserInput(userInput)
-    if(validator_errors.length > 0)
-      res.status(400).json({ errors: validator_errors });
-    else 
-      next();
-  }
-  
-  //check the input of the user if it valid
-  async validationUserInput(userInput: UserEntite):Promise<string[]> {
-    const user = plainToClass(UserEntite, userInput);
-    const errors = await validate(user);
-    if (errors.length > 0) {
-      const validationErrors = errors.map(error => Object.values(error.constraints));
-      return validationErrors.reduce((acc, val) => acc.concat(val), []);
+    const userInput: AccountParam = req.body;
+    // Check if email or username already exist in the database
+    const emailExist = await this.userService.isemailExist(userInput.email);
+   // console.log("isE " + emailExist);
+    const usernameExist = await this.userService.isusernameExist(userInput.username);
+   // console.log("isU " + usernameExist);
+    if (usernameExist) {
+      throw new HttpException('Username is already in use.', HttpStatus.BAD_REQUEST)
+      // res.status(400).json({ errors: ['Email or username is already in use.'] });
     }
-    return [];
+    if(emailExist) {
+      throw new HttpException('Email is already in use.', HttpStatus.BAD_REQUEST)
+    }
+
+    next();
   }
 }
 

@@ -1,10 +1,7 @@
 import "../style/LoginStyle.css";
+import { checkSettingValid } from "../utils/LoginUtils";
 import { Grid, Typography, Button } from "@mui/material";
-import {
-  InputPasswordField,
-  InputEmailOrUsernameField,
-} from "./TextField-comps";
-import { test } from "../Services/ServerHandler";
+import { InputPasswordField, InputEmailOrUsernameField } from "./TextField-comps";
 import AlertModal from "./Alert";
 import React, { useRef } from "react";
 
@@ -15,20 +12,22 @@ const RenderLogin = () => {
   const input_password_ref = useRef();
   const alert_ref = useRef();
 
-  const logToSystem = async() => {
-    if (input_email_username_ref.current.text == null || input_password_ref.current.text == null) {
-      alert_ref.current.open();
-      return;
-    }               
-      
-    if (!input_email_username_ref.current.error ||!input_password_ref.current.error) {
-      alert_ref.current.open();
+  const logToSystem = async() => {    
+    const res = await checkSettingValid(input_email_username_ref.current.text, input_password_ref.current.text);
+    if(res == "User doesn't exist" ) {
+      input_email_username_ref.current.errormsg(res);
+      input_email_username_ref.current.setValid(false);
       return;
     }
-        
-    else {
-      console.log("good")
+
+    else if( res == 'Incorrect Password') {
+      input_password_ref.current.errormsg(res);
+      input_password_ref.current.setValid(false);
+      return;
     }
+
+    else
+      console.log(res);
   };
 
   return (

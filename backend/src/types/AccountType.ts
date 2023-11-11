@@ -3,3 +3,7 @@ export type AccountParam = {
     email: string;
     password: string;
 };
+export type ShortAccountParam = {
+    username_email: string;
+    password: string;
+}
