@@ -1,33 +1,24 @@
-import { Controller, Get, Post, Delete, Param, Query, Body, UsePipes, ValidationPipe} from '@nestjs/common';
-import { UserService } from '../../service/user/user.service';
+import { Controller, Get, Post, Delete, Param, Query, Body, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '../../Auth/userAuth.guards';
 import { AccountDto } from '../../Dto/AccountDto';
+import { UserControllerService } from '../../service/user/UserController.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserControllerService) {}
 
-
-  @Get('email-exists')
-  async emailExists(@Query('email') email: string): Promise<boolean> {
-    return this.userService.isemailExist(email);
-  }
-
-  @Get('username-exists')
-  async usernameExists(@Query('username') username: string): Promise<boolean> {
-    return this.userService.isusernameExist(username);
-  }
-
+ 
   @Post('create')
 // @UsePipes(new ValidationPipe())
   async CreateUser(@Body() AccountDto: AccountDto) {
-    await this.userService.createUser(AccountDto);
+    return await this.userService.createUser(AccountDto);
 
   }
-
-  @Get('getuser')
-  async getUser(@Query("email_or_password")email_or_username: string,@Query('password') password: string) {
-   return await this.userService.getUser(email_or_username, password);
+  @Get('getusers')
+  async test(@Query('email-or-username') email_username: string,@Query('password') pass: string){
+    return await this.userService.getUser(email_username, pass);
   }
+  
 
   @Delete(':id')
   async deleteUser(@Param('id') id: number) {

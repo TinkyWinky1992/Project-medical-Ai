@@ -1,9 +1,8 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { UserMiddleware } from './middleware/UserMiddleware/user.middleware';
+import { Module} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './modules/user/user.module';
-import { UserEntite } from './TypeOrm/entities/user';
-import { UserLoggerMiddleware } from './middleware/UserMiddleware/user.logger.middleware';
+import { UserModule } from './user/user.module';
+import { UserEntite } from '../TypeOrm/entities/user';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({

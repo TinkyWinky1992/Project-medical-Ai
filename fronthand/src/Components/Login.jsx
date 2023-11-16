@@ -1,5 +1,5 @@
 import "../style/LoginStyle.css";
-import { checkSettingValid } from "../utils/LoginUtils";
+import { getUser } from "../Services/ServerHandler";
 import { Grid, Typography, Button } from "@mui/material";
 import { InputPasswordField, InputEmailOrUsernameField } from "./TextField-comps";
 import AlertModal from "./Alert";
@@ -13,21 +13,25 @@ const RenderLogin = () => {
   const alert_ref = useRef();
 
   const logToSystem = async() => {    
-    const res = await checkSettingValid(input_email_username_ref.current.text, input_password_ref.current.text);
-    if(res == "User doesn't exist" ) {
-      input_email_username_ref.current.errormsg(res);
-      input_email_username_ref.current.setValid(false);
-      return;
+    let data;
+    try {
+      data = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
+      console.log(data);
+    }catch(error) {
+      if (error.response) {
+        const mesg = error.response.data.message;
+        if(mesg == "User not found.") {
+          input_email_username_ref.current.errormsg(mesg);
+          input_email_username_ref.current.setValid(false);
+          return;
+        }
+        else if(mesg == "Password needs to be above 6 letters." || mesg == "Password incorrect.") {
+          input_password_ref.current.errormsg(mesg);
+          input_password_ref.current.setValid(false);
+          return;
+        }
+      }
     }
-
-    else if( res == 'Incorrect Password') {
-      input_password_ref.current.errormsg(res);
-      input_password_ref.current.setValid(false);
-      return;
-    }
-
-    else
-      console.log(res);
   };
 
   return (

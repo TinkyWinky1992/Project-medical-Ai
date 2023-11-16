@@ -1,6 +1,5 @@
 import "../style/LoginStyle.css";
 import { postUser } from "../Services/ServerHandler";
-import { checkEmailValid, checkUsernameValid, checkPasswordValid} from "../utils/RegisterUtils";
 import { InputPasswordField, InputEmailField, InputUsernameField } from "./TextField-comps";
 import AlertModal from "./Alert";
 import { Grid, Typography, Button } from "@mui/material";
@@ -14,30 +13,54 @@ const RenderRegister = () => {
 
 
    const registerInSystem = async () => {
-    const validation_email = await checkEmailValid(input_email_ref.current.text);
-    const validation_username = await checkUsernameValid(input_username_ref.current.text);
-    const validation_password = await checkPasswordValid(input_password_ref.current.text);
+    let data;
+    try {
+        data = await postUser(
+        input_username_ref.current.text,
+        input_email_ref.current.text,
+        input_password_ref.current.text
+      );
 
-    if(validation_email != null)
-    {
-      input_email_ref.current.errormsg(validation_email);
-      input_email_ref.current.setValid(false);
-      return;
+    } catch (error) {
+      if (error.response) {
+        if(error.response.data.message == "Username is already in use.") 
+        {
+          input_username_ref.current.errormsg(error.response.data.message);
+          input_username_ref.current.setValid(false);
+          return;
+        }
+
+        if(error.response.data.message == "Email is already in use.")
+        {
+          input_email_ref.current.errormsg(error.response.data.message);
+          input_email_ref.current.setValid(false);
+          return;
+        }
+
+        if(error.response.data.message == "Password need to be above 6 letters.") 
+        {
+          input_password_ref.current.errormsg(error.response.data.message);
+          input_password_ref.current.setValid(false);
+          return;
+        }
+        if (error.response && error.response.data && error.response.data.statusCode === 500) 
+        {
+          input_email_ref.current.errormsg("There is a problem with your details");
+          input_email_ref.current.setValid(false);
+          return;
+        }
+
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log('No response received from the server');
+        return;
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error:', error.message);
+        return;
+      }
     }
-    else if(validation_username != null) 
-    {
-      input_username_ref.current.errormsg(validation_username);
-      input_username_ref.current.setValid(false);
-      return;
-    }
-    else if(validation_password != null) 
-    {
-      input_password_ref.current.errormsg(validation_password);
-      input_password_ref.current.setValid(false);
-    }
-    else {
-      await postUser(input_username_ref.current.text, input_email_ref.current.text, input_password_ref.current.text);
-    }
+    console.log(data);
   };
 
   return (
