@@ -18,23 +18,19 @@ const openai = new OpenAI({
 function Ai() {
   const [content, setcontent] = useState();
   let messageList = [];
-  /*
+ 
   const read = async () =>{
-   const data = await axios.get(raw);
-   setcontent(data);
-  }
-  read().catch(error => {
-    console.log("Someting goes worng when reading description file")
-  });
-
-    */
-
-  fetch(raw)
-    .then((r) => r.text())
-    .then((text) => {
-      setcontent(text);
-    });
-
+    try{
+      const respone = await axios.get(raw);
+      console.log(respone);
+      setcontent(respone.data);
+    }catch (error) {
+      console.error("Error while making the request to api:", error);
+      throw error; // Rethrow the error for further handling if needed}
+    }
+  } 
+read();
+    
   const generateText = async (userInput) => {
     const userMessage = { role: "user", content: userInput.textContent };
     messageList.push(userMessage);

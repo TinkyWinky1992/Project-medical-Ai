@@ -6,10 +6,12 @@
 2.8. npm install --save-dev jest
 3. npm i -g @nestjs/cli
 npm install class-validator class-transformer
+npm i bcrypt
 
 4. npm install @mui/material @emotion/react @emotion/styled
 5. npm install @mui/material @mui/styled-engine-sc styled-components
 6. npm install @fontsource/roboto
+npm install
 
 sql:
 npm add @nestjs/typeorm typeorm mysql2 - 6in backend
