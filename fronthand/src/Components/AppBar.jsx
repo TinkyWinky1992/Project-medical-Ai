@@ -28,20 +28,21 @@ const MenuAppBar =forwardRef((props, ref)=> {
   
   const userAnchor_ref = useRef();
   const [selectedPage, setSelectedPage] = useState(0);
-  let correct_url = routes.MENU;
+  const [selectedUrl, setSelectedUrl] = useState(routes.MENU);
   
   const handleChange = (event, newValue) => {
-  
     setSelectedPage(newValue);
+    setSelectedUrl(pages[newValue].route_url);
+
   };
 
   const handleOpenUserDialog = (event) => {
     userAnchor_ref.current.openAnchor(event.currentTarget);
   };
-
   useImperativeHandle(ref, () => ({
-    url: correct_url,
+    url: selectedUrl,
   }));
+
   return (
     <AppBar position="static">
       <ThemeProvider theme={darkTheme}>
