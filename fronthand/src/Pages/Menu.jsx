@@ -9,7 +9,7 @@ function Menu() {
     return (
       <div className="menu-screen">
         <Grid>
-          <MenuAppBar/>
+
           
         </Grid>
       </div>
