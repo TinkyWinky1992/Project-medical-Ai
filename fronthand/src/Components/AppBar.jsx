@@ -1,93 +1,113 @@
-import  React, {useState, useRef} from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import UserAnchor from './Anchor';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import { Tab, Tabs } from '@mui/material';
-
-
+import React, { useState, useRef, forwardRef, useImperativeHandle } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import UserAnchor from "./Anchor";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import { Tab, Tabs } from "@mui/material";
+import routes from "../routing/routes";
 const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-    },
-  });
-function MenuAppBar() {
-    const userAnchor_ref = useRef();
-    const [selectedPage, setSelectedPage ] = useState(0);
-    const pages = ['Menu', 'Talk With Your Doctor', 'Your Appoiments', 'About'];
+  palette: {
+    mode: "dark",
+  },
+});
+const pages =[];
+pages.push({page_name: "Menu", route_url: routes.MENU})
+pages.push({page_name: "Talk With Your Doctor", route_url: routes.TALK_WITH_ROBERTO})
+pages.push({page_name: "Your Appoiments", route_url: routes.TALK_WITH_ROBERTO})
+pages.push({page_name: "About", route_url: routes.TALK_WITH_ROBERTO})
 
-    const handleChange = (event, newValue) => {
-        setSelectedPage(newValue);
-      };
 
-    const handleOpenUserDialog = (event) => {
-        userAnchor_ref.current.openAnchor(event.currentTarget);
-    };    
+const MenuAppBar =forwardRef((props, ref)=> {
+  
+  const userAnchor_ref = useRef();
+  const [selectedPage, setSelectedPage] = useState(0);
+  let correct_url = routes.MENU;
+  
+  const handleChange = (event, newValue) => {
+  
+    setSelectedPage(newValue);
+  };
 
-    return ( 
-            <AppBar position="static">
-            <ThemeProvider theme={darkTheme}>
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                        <EmojiEmotionsIcon sx={{ display: { xs: 'none', md: 'flex', fontSize: 40 }, mr: 1 }} />
-                        <Typography  variant="h6" noWrap 
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }} 
-                        >WELCOME</Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
-                            <Tabs value={selectedPage} onChange={handleChange}>
-                                {pages.map((page, index) => (
-                                    <Tab
-                                        key={index}
-                                        label={page}
-                                        sx={{ my: 2, 
-                                            margin: 1,
-                                            color: 'white', 
-                                            display: 'block', 
-                                            fontFamily: 'monospace' ,
-                                            fontSize: 16,
-                                            fontWeight: 700,
-                                            transition: 'transform 0.2s',
-                                            '&:hover': {
-                                                transform: 'translateY(-4px)',
-                                            },
-                                        }}  
-                                    >{page}
-                                    </Tab>
-                                ))}
-                            </Tabs>
-                        </Box>
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton  sx={{ p: 0 }} onClick={handleOpenUserDialog}  >
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                            <UserAnchor ref={userAnchor_ref}/>     
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </ThemeProvider>
-            </AppBar>
-    );
-}
+  const handleOpenUserDialog = (event) => {
+    userAnchor_ref.current.openAnchor(event.currentTarget);
+  };
+
+  useImperativeHandle(ref, () => ({
+    url: correct_url,
+  }));
+  return (
+    <AppBar position="static">
+      <ThemeProvider theme={darkTheme}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <EmojiEmotionsIcon
+              sx={{ display: { xs: "none", md: "flex", fontSize: 40 }, mr: 1 }}
+            />
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              WELCOME
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <Tabs value={selectedPage} onChange={handleChange}
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: "#ffffff"
+                  }
+                }} >
+                {pages.map((page, index) => ( 
+                    <Tab
+                      key={index}
+                      label={page.page_name}
+                      sx={{
+                        my: 2,
+                        margin: 1,
+                        color: "white",
+                        display: "block",
+                        fontFamily: "monospace",
+                        fontSize: 16,
+                        fontWeight: 700,
+                        transition: "transform 0.2s",
+                        "&:hover": {
+                          transform: "translateY(-4px)",
+                        },
+                      }}
+                    >
+                      {page.page_name}
+                    </Tab>
+                  
+                ))}
+              </Tabs>
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton sx={{ p: 0 }} onClick={handleOpenUserDialog}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <UserAnchor ref={userAnchor_ref} />
+            </Box>
+          </Toolbar>
+        </Container>
+      </ThemeProvider>
+    </AppBar>
+  );
+});
 export default MenuAppBar;
-

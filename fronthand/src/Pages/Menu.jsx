@@ -6,11 +6,11 @@ import MenuAppBar from "../Components/AppBar";
 
 
 function Menu() {
-  
     return (
       <div className="menu-screen">
         <Grid>
           <MenuAppBar/>
+          
         </Grid>
       </div>
     );
