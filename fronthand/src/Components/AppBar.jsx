@@ -1,5 +1,6 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import UserAnchor from "./Anchor";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -27,21 +28,19 @@ pages.push({page_name: "About", route_url: routes.TALK_WITH_ROBERTO})
 const MenuAppBar =forwardRef((props, ref)=> {
   
   const userAnchor_ref = useRef();
+  const navigate = useNavigate(); 
   const [selectedPage, setSelectedPage] = useState(0);
-  const [selectedUrl, setSelectedUrl] = useState(routes.MENU);
   
   const handleChange = (event, newValue) => {
     setSelectedPage(newValue);
-    setSelectedUrl(pages[newValue].route_url);
+    navigate(pages[newValue].route_url);
 
   };
 
   const handleOpenUserDialog = (event) => {
     userAnchor_ref.current.openAnchor(event.currentTarget);
   };
-  useImperativeHandle(ref, () => ({
-    url: selectedUrl,
-  }));
+
 
   return (
     <AppBar position="static">

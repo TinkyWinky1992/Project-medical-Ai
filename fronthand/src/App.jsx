@@ -1,21 +1,27 @@
 import React, { useRef } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import RenderChatbox from "./Pages/ChatBoxWithAi";
-import RenderLoginOrRegister from "./Pages/login-register";
-import Menu from "./Pages/Menu";
+import { createRoot } from "react-dom/client";
+import {
+  BrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 import MenuAppBar from "./Components/AppBar";
 import router from "./routing/router";
 
 function App() {
-  const reff = useRef();
+  createRoot(document.getElementById("root")).render(
+    <RouterProvider router={router} />
+  );
 
   return (
-    <Router>
-      <div className="App">
-        <MenuAppBar ref={reff} />
+    <div className="App">
+      <MenuAppBar/>
+      <BrowserRouter>
+   
+      </BrowserRouter>
+    </div>
 
-      </div>
-    </Router>
   );
 }
 
