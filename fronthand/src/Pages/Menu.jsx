@@ -1,7 +1,7 @@
 import "../style/menuStyle.css"
-import React, { useRef } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
-import MenuAppBar from "../Components/AppBar";
+
 
 
 
@@ -9,8 +9,7 @@ function Menu() {
     return (
       <div className="menu-screen">
         <Grid>
-
-          
+          <h1>Hi Menu</h1>
         </Grid>
       </div>
     );
