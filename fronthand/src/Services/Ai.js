@@ -8,7 +8,7 @@ import {
 } from "../utils/ChatUtil";
 import raw from "../ai-description.txt";
 
-const API_KEY = " ";
+const API_KEY = "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";
 
 const openai = new OpenAI({
   apiKey: API_KEY,
@@ -19,10 +19,10 @@ function Ai() {
   const [content, setcontent] = useState();
   let messageList = [];
  
-  const read = async () =>{
+  const read = async () =>
+  {
     try{
       const respone = await axios.get(raw);
-      console.log(respone);
       setcontent(respone.data);
     }catch (error) {
       console.error("Error while making the request to api:", error);
@@ -49,8 +49,10 @@ read();
       const aiMessage = { role: "assistant", content: textAI };
 
       messageList.push(aiMessage);
-      console.log(getLevelFromconvirstion(textAI));
-      console.log(getProblemFromconvirstion(textAI));
+
+      //console.log(getLevelFromconvirstion(textAI));
+      //console.log(getProblemFromconvirstion(textAI));
+
       return textAI;
     } catch (error) {
       // Handle network or other unexpected errors

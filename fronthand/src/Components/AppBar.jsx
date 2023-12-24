@@ -12,18 +12,12 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { Tab, Tabs } from "@mui/material";
-import routes from "../routing/routes";
+import { main_pages } from "../routing/routes";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
 });
-const pages =[];
-pages.push({page_name: "Menu", route_url: routes.MENU})
-pages.push({page_name: "Talk With Your Doctor", route_url: routes.TALK_WITH_ROBERTO})
-pages.push({page_name: "Your Appoiments", route_url: routes.YOUR_APPOINMENT})
-pages.push({page_name: "About", route_url: routes.ABOUT})
-
 
 const MenuAppBar =forwardRef((props, ref)=> {
   
@@ -33,7 +27,7 @@ const MenuAppBar =forwardRef((props, ref)=> {
   
   const handleChange = (event, newValue) => {
     setSelectedPage(newValue);
-    navigate(pages[newValue].route_url);
+    navigate(main_pages[newValue].route_url);
 
 
   };
@@ -71,7 +65,7 @@ const MenuAppBar =forwardRef((props, ref)=> {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Tabs value={selectedPage} onChange={handleChange}>
-                {pages.map((page, index) => ( 
+                {main_pages.map((page, index) => ( 
                     <Tab
                       key={index}
                       label={page.page_name}

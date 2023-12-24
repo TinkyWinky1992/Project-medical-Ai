@@ -1,11 +1,20 @@
 import React, { useState, forwardRef, useImperativeHandle} from "react";
 import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { dialog_pages } from "../routing/routes";
 
 const UserAnchor = forwardRef((props, ref) => {
     const [UserAnchor, setUserAnchor] = useState(null);
-    const settings = ['Profile', 'Support', , 'Logout'];
+    const navigate = useNavigate();
+
+    const handleSelect= (event, newValue) => {
+        console.log();
+        navigate(dialog_pages[0].route_url);
+    
+    
+      };
     
     const handleCloseUserAnchor = () => {
         setUserAnchor(null);
@@ -32,9 +41,9 @@ const UserAnchor = forwardRef((props, ref) => {
         open={Boolean(UserAnchor)}
         onClose={handleCloseUserAnchor}
         >
-        {settings.map((setting) => (
-            <MenuItem key={setting}>
-                <Typography textAlign="center">{setting}</Typography>
+        {dialog_pages.map((page, index) => (
+            <MenuItem key={index} onClick={handleSelect}>
+                <Typography textAlign="center">{page.page_name}</Typography>
             </MenuItem>
         ))}
         </Menu>

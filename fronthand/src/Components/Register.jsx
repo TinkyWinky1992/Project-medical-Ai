@@ -60,7 +60,7 @@ const RenderRegister = () => {
         return;
       }
     }
-    console.log(data);
+    return data;
   };
 
   return (

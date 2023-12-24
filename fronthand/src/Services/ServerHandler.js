@@ -40,3 +40,17 @@ export const isEmailExist = async (email) => {
   );
   return response.data;
 };
+
+/*
+export const isAuth = async(user) =>{
+  const response = await axios.get(
+    "http://localhost:5000/users/is-authenticated",{
+      username: user.username_temp,
+      email: user.email_temp,
+      password: user.password_temp,
+    }
+  );
+  console.log(response.data);
+  return response.data;
+}
+*/

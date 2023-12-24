@@ -15,7 +15,8 @@ const RenderLogin = () => {
     let data;
     try {
       data = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
-      console.log(data);
+      return data;
+      
     }catch(error) {
       if (error.response) {
         const mesg = error.response.data.message;
