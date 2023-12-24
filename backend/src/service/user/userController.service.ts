@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { AccountParam } from '../../types/AccountType';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../../Auth/Auth.service';
-import { AccountDto } from '../../Dto/AccountDto';
+
 
 @Injectable()
 export class UserControllerService {
