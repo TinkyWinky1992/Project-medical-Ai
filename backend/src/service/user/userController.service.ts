@@ -24,7 +24,7 @@ export class UserControllerService {
     );
     
     const new_user_entite: UserEntite = this.user_repository.create({...accountDetails});
-    const token = await this.AuthUser.login(new_user_entite)
+    const token = await this.AuthUser.loginAuth(new_user_entite)
 
     if (token && token.access_token) 
       return this.user_repository.save(new_user_entite);
@@ -56,7 +56,7 @@ export class UserControllerService {
       throw new HttpException('Password incorrect.', HttpStatus.BAD_REQUEST);
   //------------------------------------------------------------
 
-    const token = await this.AuthUser.login(user);
+    const token = await this.AuthUser.loginAuth(user);
     console.log(token);
     if (token && token.access_token) 
       return user;

@@ -12,13 +12,11 @@ export class UserRegisterMiddleware implements NestMiddleware {
     const userInput: AccountParam = req.body;
     // Check if email or username already exist in the database
     const emailExist = await this.userService.isemailExist(userInput.email);
-   
     const usernameExist = await this.userService.isusernameExist(userInput.username);
 
     if (usernameExist) 
       throw new HttpException('Username is already in use.', HttpStatus.BAD_REQUEST)
       
-    
     if(emailExist) 
       throw new HttpException('Email is already in use.', HttpStatus.BAD_REQUEST)
     

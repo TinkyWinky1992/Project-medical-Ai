@@ -16,3 +16,14 @@ npm install
 
 sql:
 npm add @nestjs/typeorm typeorm mysql2 - 6in backend
+
+
+
+
+WEP_PORT=5000
+JWT_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwMDA4MTY4OSwiaWF0IjoxNzAwMDgxNjg5fQ.3yDRJbq6b-cAD61tKKUJxhrzI1Td5VsoIrh4WgWBt4w
+LOCAL_HOST=localhost
+PORT_DATABASE=3306
+USERNAME_DATABASE=root
+PASSWORD_DATABASE=admin
+NAME_DATABASE=usersdatabase

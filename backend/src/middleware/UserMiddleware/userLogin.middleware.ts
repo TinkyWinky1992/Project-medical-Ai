@@ -19,7 +19,11 @@ export class UserLoginMiddleware implements NestMiddleware {
 
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     let user = new AccountDto();
-
+    //checking if user exsist in the data base
+    /*
+      we checking first if the input user is email or username.
+      then we checking the value in the data base if it exsist.
+    */
     if (emailRegex.test(userInput.username_email)) 
       user = await this.userService.getUserByEmail(userInput.username_email);
     else 
@@ -31,7 +35,7 @@ export class UserLoginMiddleware implements NestMiddleware {
         // checking password length
     if (userInput.password.length <= 6) 
         throw new HttpException('Password needs to be above 6 letters.', HttpStatus.BAD_REQUEST);
-
+    //checking the password if it correct.
     const isMatchPassword = await this.userService.comparePassword(userInput.password, user.password);
     if(!isMatchPassword) 
       throw new HttpException('Password incorrect. ', HttpStatus.BAD_REQUEST);

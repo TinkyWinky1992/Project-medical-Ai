@@ -27,6 +27,23 @@ export const getUser = async (email_or_username, password ) => {
   }
 };
 
+export const checkAuth = async (user) =>{
+  
+}
+/*
+export const isAuth = async(user) =>{
+  const response = await axios.get(
+    "http://localhost:5000/users/is-authenticated",{
+      username: user.username_temp,
+      email: user.email_temp,
+      password: user.password_temp,
+    }
+  );
+  console.log(response.data);
+  return response.data;
+}
+
+
 export const isUsernameExist = async (username) => {
   const response = await axios.get(
     `http://localhost:5000/users/username-exists?username=${username}`
@@ -40,17 +57,4 @@ export const isEmailExist = async (email) => {
   );
   return response.data;
 };
-
-/*
-export const isAuth = async(user) =>{
-  const response = await axios.get(
-    "http://localhost:5000/users/is-authenticated",{
-      username: user.username_temp,
-      email: user.email_temp,
-      password: user.password_temp,
-    }
-  );
-  console.log(response.data);
-  return response.data;
-}
 */

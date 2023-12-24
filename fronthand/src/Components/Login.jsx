@@ -12,10 +12,10 @@ const RenderLogin = () => {
   const alert_ref = useRef();
 
   const logToSystem = async() => {    
-    let data;
+    let user;
     try {
-      data = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
-      return data;
+      user = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
+      return user;
       
     }catch(error) {
       if (error.response) {
