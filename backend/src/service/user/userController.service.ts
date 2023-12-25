@@ -33,33 +33,21 @@ export class UserControllerService {
     
   }
 
-  async getUser(email_or_username: string, password:string): Promise<UserEntite> {
+  async getUser(email_or_username: string, password:string): Promise<{accsesToken: string}> {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     let user = new UserEntite();
     
-  //------------------------------------------------------------checking usesr details..
     if (emailRegex.test(email_or_username)) 
-      user = await this.user_repository.findOne({ where: { email: email_or_username } });
-    
-    else 
-      user = await this.user_repository.findOne({ where: { username: email_or_username } });
+    user = await this.user_repository.findOne({ where: { email: email_or_username } });
   
-    if (!user) 
-      throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
+  else 
+    user = await this.user_repository.findOne({ where: { username: email_or_username } });
 
-    // checking password length
-    if (password.length <= 6) 
-      throw new HttpException('Password needs to be above 6 letters.', HttpStatus.BAD_REQUEST);
-
-    const isMatchPassword = await bcrypt.compare(password, user.password);
-    if (!isMatchPassword) 
-      throw new HttpException('Password incorrect.', HttpStatus.BAD_REQUEST);
-  //------------------------------------------------------------
 
     const token = await this.AuthUser.loginAuth(user);
-    console.log(token);
+   // console.log(token);
     if (token && token.access_token) 
-      return user;
+      return {accsesToken: token.access_token}
     else 
       throw new Error('Authentication failed');
 
@@ -78,3 +66,24 @@ export class UserControllerService {
     }
   }
 }
+
+
+
+
+/*
+  //------------------------------------------------------------checking usesr details..
+
+  
+    if (!user) 
+    throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
+
+  // checking password length
+  if (password.length <= 6) 
+    throw new HttpException('Password needs to be above 6 letters.', HttpStatus.BAD_REQUEST);
+
+  const isMatchPassword = await bcrypt.compare(password, user.password);
+  if (!isMatchPassword) 
+    throw new HttpException('Password incorrect.', HttpStatus.BAD_REQUEST);
+  //------------------------------------------------------------
+
+*/

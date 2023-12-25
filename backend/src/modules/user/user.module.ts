@@ -1,4 +1,4 @@
-import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { UserRegisterMiddleware } from '../../middleware/UserMiddleware/userRegister.middleware';
 import { UserLoggerMiddleware } from '../../middleware/UserMiddleware/userLogger.middleware';
 import { UserLoginMiddleware } from '../../middleware/UserMiddleware/userLogin.middleware';
@@ -27,7 +27,7 @@ export class UserModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(UserRegisterMiddleware).forRoutes('users/create');
     consumer.apply(UserLoggerMiddleware).forRoutes('users');
-    consumer.apply(UserLoginMiddleware).forRoutes('users/getuser');
+    consumer.apply(UserLoginMiddleware).forRoutes({path: 'users/getusers', method: RequestMethod.ALL});
     
   }
 }

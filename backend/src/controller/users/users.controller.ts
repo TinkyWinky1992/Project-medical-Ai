@@ -9,17 +9,16 @@ export class UsersController {
 
  
   @Post('create')
-// @UsePipes(new ValidationPipe())
   async CreateUser(@Body() AccountDto: AccountDto) {
     return await this.userService.createUser(AccountDto);
 
   }
   @Get('getusers')
-  async test(@Query('email-or-username') email_username: string,@Query('password') pass: string){
+  async getUserFromDataBase(@Query('email-or-username') email_username: string,@Query('password') pass: string){
     return await this.userService.getUser(email_username, pass);
   }
   
-
+/*
   @Get('is-authenticated')
   @UseGuards(AuthGuard)
   async isAuthenticated(@Body() AccountDto: AccountDto) {
@@ -33,7 +32,7 @@ export class UsersController {
     return { isAuthenticated: true };
     
   }
-
+*/
 }
   /*
   @Delete(':id')

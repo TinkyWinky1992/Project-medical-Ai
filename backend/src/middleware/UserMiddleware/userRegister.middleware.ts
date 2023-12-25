@@ -1,3 +1,9 @@
+/*
+  the Register middlerware check for input user.
+  if the input are not already in the database.
+
+  checking if the passord is valid , need to be above 6 letters.
+*/
 import {  HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 import { AccountParam  } from '../../types/AccountType';
@@ -9,6 +15,7 @@ export class UserRegisterMiddleware implements NestMiddleware {
   constructor(private readonly userService: UserService ) {
   }
   async use(req: Request, res: Response, next: NextFunction) {
+    console.log(req.body);
     const userInput: AccountParam = req.body;
     // Check if email or username already exist in the database
     const emailExist = await this.userService.isemailExist(userInput.email);

@@ -12,3 +12,12 @@ export class AccountDto {
     @IsNotEmpty()
     password: string;
 }
+
+export class ShortAccountDto {
+
+    @IsNotEmpty()
+    username_email: string;
+
+    @IsNotEmpty()
+    password: string;
+}
