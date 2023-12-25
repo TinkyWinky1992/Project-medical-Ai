@@ -27,10 +27,19 @@ export const getUser = async (email_or_username, password ) => {
   }
 };
 
-export const checkAuth = async (user) =>{
-  
+export const checkAuth = async (token) =>{
+  try {
+    const response = await axios.get(`http://localhost:5000/users/AuthUser?token=${token}`);
+    console.log(response.data);
+    return response.data;
+} catch (error) {
+    console.error("Error while making the GET request:", error);
+    throw error; // Rethrow the error for further handling if needed
+  }
 }
 /*
+  @Get('AuthUser')
+
 export const isAuth = async(user) =>{
   const response = await axios.get(
     "http://localhost:5000/users/is-authenticated",{

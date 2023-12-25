@@ -7,7 +7,7 @@ import RenderLoginOrRegister from "../Pages/login-register";
 import { createBrowserRouter } from "react-router-dom";
 import { routes } from "./routes";
 import App from "../App";
-
+ 
 const router = createBrowserRouter([
   {
     path: routes.LOGIN_REGISTER,

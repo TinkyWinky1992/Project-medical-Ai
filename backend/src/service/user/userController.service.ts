@@ -45,14 +45,17 @@ export class UserControllerService {
 
 
     const token = await this.AuthUser.loginAuth(user);
-   // console.log(token);
+
     if (token && token.access_token) 
       return {accsesToken: token.access_token}
     else 
       throw new Error('Authentication failed');
 
   }
-  
+  async checkUserAuth(accessToken: string) {
+    const isValidToken = await this.AuthUser.tokenValid(accessToken);
+    return isValidToken;
+  }
   
 
   //delete user from database

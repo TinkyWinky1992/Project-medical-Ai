@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { Tab, Tabs } from "@mui/material";
 import { main_pages } from "../routing/routes";
+import Cookies from 'js-cookie';
+import { checkAuthUser } from "../routing/routerProtection";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -25,10 +27,16 @@ const MenuAppBar =forwardRef((props, ref)=> {
   const [selectedPage, setSelectedPage] = useState(0);
   const navigate = useNavigate();
   
-  const handleChange = (event, newValue) => {
+  const handleChange = async(event, newValue) => {
     setSelectedPage(newValue);
-    navigate(main_pages[newValue].route_url);
-
+    try{
+      const res = await checkAuthUser(Cookies.get('User_token'));
+      console.log("response from main: " + res);
+      navigate(main_pages[newValue].route_url);
+    }catch(error){
+      console.log(error)
+    }
+    
 
   };
 
@@ -64,7 +72,7 @@ const MenuAppBar =forwardRef((props, ref)=> {
               WELCOME
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Tabs value={selectedPage} onChange={handleChange}>
+              <Tabs value={selectedPage} onChange={async()=> { await handleChange()}}>
                 {main_pages.map((page, index) => ( 
                     <Tab
                       key={index}
