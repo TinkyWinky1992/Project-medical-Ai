@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,UnauthorizedException  } from '@nestjs/common';
 import {JwtService} from '@nestjs/jwt'
 import { UserEntite } from '../TypeOrm/entities/user';
 //import { UserControllerService } from '../service/user/UserController.service';
@@ -9,15 +9,22 @@ export class AuthService{
     constructor(private jwtService: JwtService) {}
 
     async tokenValid(access_token: string) {
-        try{
-            const isValid = this.jwtService.verifyAsync(access_token);
+        try {
+            const isValid = this.jwtService.verify(access_token);
+            console.log(isValid);
             return isValid;
-            
-        }catch(error){
-            console.log(error)
+        } catch (error) {
+            if (error.name === 'TokenExpiredError') {
+                // Token is expired
+                throw new UnauthorizedException('Token has expired');
+            } else {
+                // Token is invalid for some other reason
+                console.log(error);
+                throw new UnauthorizedException('Invalid token');
+            }
         }
-        
     }
+    
     async loginAuth(user:UserEntite ) {
         const payload= {sub: user.id, username: user.username}
         return {

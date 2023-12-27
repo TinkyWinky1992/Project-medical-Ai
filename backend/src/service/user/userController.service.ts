@@ -53,8 +53,16 @@ export class UserControllerService {
 
   }
   async checkUserAuth(accessToken: string) {
-    const isValidToken = await this.AuthUser.tokenValid(accessToken);
-    return isValidToken;
+    try{
+      const isValidToken = await this.AuthUser.tokenValid(accessToken);
+      console.log(accessToken);
+      console.log("checking" + isValidToken);
+     return isValidToken;
+    }catch(error)
+    {
+      console.log(error);
+    }
+
   }
   
 

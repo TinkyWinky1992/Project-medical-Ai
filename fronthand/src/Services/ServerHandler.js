@@ -29,6 +29,7 @@ export const getUser = async (email_or_username, password ) => {
 
 export const checkAuth = async (token) =>{
   try {
+    //console.log(token);
     const response = await axios.get(`http://localhost:5000/users/AuthUser?token=${token}`);
     console.log(response.data);
     return response.data;

@@ -4,13 +4,13 @@ import React, { useRef } from "react";
 import { postUser } from "../Services/ServerHandler";
 import { InputPasswordField, InputEmailField, InputUsernameField } from "./TextField-comps";
 import { Grid, Typography, Button } from "@mui/material";
-
-
+import { main_pages, dialog_pages } from "../routing/routes";
+import { useNavigate } from "react-router-dom";
 const RenderRegister = () => {
   const input_email_ref = useRef();
   const input_username_ref = useRef();
   const input_password_ref = useRef();
-
+  const navigate = useNavigate();
 
    const registerInSystem = async () => {
     let data;
@@ -23,7 +23,9 @@ const RenderRegister = () => {
         input_password_ref.current.text
       );
     Cookies.set('User_token',data.accsesToken);
+    navigate(main_pages[0].route_url)
 
+    
     } catch (error) {
       if (error.response) {
         if(error.response.data.message == "Username is already in use.") 

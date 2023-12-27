@@ -4,13 +4,14 @@ import React, { useRef } from "react";
 import { getUser } from "../Services/ServerHandler";
 import { Grid, Typography, Button } from "@mui/material";
 import { InputPasswordField, InputEmailOrUsernameField } from "./TextField-comps";
-
+import { main_pages } from "../routing/routes";
+import { useNavigate } from "react-router-dom";
 
 
 const RenderLogin = () => {
   const input_email_username_ref = useRef();
   const input_password_ref = useRef();
-
+  const navigate = useNavigate();
 
   const logToSystem = async() => {    
     let token_jwt;
@@ -19,7 +20,7 @@ const RenderLogin = () => {
       //to give the user premission to accses most of the routes
       token_jwt = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
       Cookies.set('User_token',token_jwt.accsesToken);
-
+      navigate(main_pages[0].route_url);
     }catch(error) {
       if (error.response) {
         const mesg = error.response.data.message;

@@ -12,9 +12,9 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { Tab, Tabs } from "@mui/material";
-import { main_pages } from "../routing/routes";
+import { main_pages, dialog_pages } from "../routing/routes";
 import Cookies from 'js-cookie';
-import { checkAuthUser } from "../routing/routerProtection";
+import { checkAuth } from "../Services/ServerHandler";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -27,16 +27,23 @@ const MenuAppBar =forwardRef((props, ref)=> {
   const [selectedPage, setSelectedPage] = useState(0);
   const navigate = useNavigate();
   
-  const handleChange = async(event, newValue) => {
-    setSelectedPage(newValue);
+  const handleAuthUser= async() => {
     try{
-      const res = await checkAuthUser(Cookies.get('User_token'));
-      console.log("response from main: " + res);
-      navigate(main_pages[newValue].route_url);
-    }catch(error){
-      console.log(error)
+    const is_accses= await  checkAuth(Cookies.get('User_token'));
+    if(!is_accses)
+    {
+      navigate(dialog_pages[0].route_url);
     }
-    
+    console.log(is_accses);
+
+  }catch(error){
+    console.log(error);
+    navigate(dialog_pages[0].route_url);
+  }
+  }
+  const handleChange = (event, newValue) => {
+    setSelectedPage(newValue);
+    navigate(main_pages[newValue].route_url);
 
   };
 
@@ -72,9 +79,10 @@ const MenuAppBar =forwardRef((props, ref)=> {
               WELCOME
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Tabs value={selectedPage} onChange={async()=> { await handleChange()}}>
+              <Tabs value={selectedPage} onChange={handleChange}>
                 {main_pages.map((page, index) => ( 
                     <Tab
+                      onClick={async()=>{handleAuthUser()}}
                       key={index}
                       label={page.page_name}
                       sx={{
