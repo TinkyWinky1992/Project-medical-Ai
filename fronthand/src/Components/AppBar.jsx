@@ -34,7 +34,6 @@ const MenuAppBar =forwardRef((props, ref)=> {
     {
       navigate(dialog_pages[0].route_url);
     }
-    console.log(is_accses);
 
   }catch(error){
     console.log(error);

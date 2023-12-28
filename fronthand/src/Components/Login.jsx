@@ -29,7 +29,7 @@ const RenderLogin = () => {
           input_email_username_ref.current.setValid(false);
           
         }
-        else if(mesg == "Password needs to be above 6 letters." || mesg == "Password incorrect.") {
+        else if(mesg == "Password needs to be above 6 letters." || mesg == "Password incorrect. ") {
           input_password_ref.current.errormsg(mesg);
           input_password_ref.current.setValid(false);
           

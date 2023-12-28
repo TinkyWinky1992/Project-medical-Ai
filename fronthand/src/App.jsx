@@ -4,9 +4,7 @@ import { Outlet } from "react-router-dom";
 
 
 function App() {
-  let user;
-  if (user == null)
-    console.log("Fales");
+
   
   return (
     <div className="App">

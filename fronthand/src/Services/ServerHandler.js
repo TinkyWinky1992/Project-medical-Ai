@@ -31,7 +31,6 @@ export const checkAuth = async (token) =>{
   try {
     //console.log(token);
     const response = await axios.get(`http://localhost:5000/users/AuthUser?token=${token}`);
-    console.log(response.data);
     return response.data;
 } catch (error) {
     console.error("Error while making the GET request:", error);

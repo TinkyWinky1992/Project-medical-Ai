@@ -61,8 +61,10 @@ export class UserLoginMiddleware implements NestMiddleware {
       userInput.password,
       user.password,
     );
-    if (!isMatchPassword)
+    if (!isMatchPassword)   
       throw new HttpException('Password incorrect. ', HttpStatus.BAD_REQUEST);
+     
+
 
     next();
   }

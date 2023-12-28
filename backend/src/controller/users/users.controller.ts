@@ -17,7 +17,7 @@ export class UsersController {
   async getUserFromDataBase(@Query('email-or-username') email_username: string,@Query('password') pass: string){
     return await this.userService.getUser(email_username, pass);
   }
-
+  
   @Get('AuthUser')
   async isAuthUser(@Query('token') token:string)  {
     return await this.userService.checkUserAuth(token);
