@@ -19,7 +19,8 @@ const RenderLogin = () => {
       //getting the jwt token for authication route. 
       //to give the user premission to accses most of the routes
       token_jwt = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
-      Cookies.set('User_token',token_jwt.accsesToken);
+      console.log(token_jwt.accsesToken);
+      Cookies.set('User_token', token_jwt.accsesToken);
       navigate(main_pages[0].route_url);
     }catch(error) {
       if (error.response) {

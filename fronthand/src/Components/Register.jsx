@@ -22,6 +22,7 @@ const RenderRegister = () => {
         input_email_ref.current.text,
         input_password_ref.current.text
       );
+    console.log(data.accsesToken);
     Cookies.set('User_token',data.accsesToken);
     navigate(main_pages[0].route_url)
 

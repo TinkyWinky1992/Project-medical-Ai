@@ -30,7 +30,12 @@ export const getUser = async (email_or_username, password ) => {
 export const checkAuth = async (token) =>{
   try {
     //console.log(token);
-    const response = await axios.get(`http://localhost:5000/users/AuthUser?token=${token}`);
+    const response = await axios.get(`http://localhost:5000/users/AuthUser`,{
+      headers: {
+        Authorization: `Bearer${token}`
+      }
+
+    });
     return response.data;
 } catch (error) {
     console.error("Error while making the GET request:", error);
