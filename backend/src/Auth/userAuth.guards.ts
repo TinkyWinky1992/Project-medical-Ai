@@ -1,19 +1,24 @@
 import {CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
   import { JwtService } from '@nestjs/jwt';
   import { jwtConstants } from './Constants';
-  import { Request } from 'express';
+  import { jwtDecode } from "jwt-decode";
   
   @Injectable()
   export class AuthGuard implements CanActivate {
     constructor(private jwtService: JwtService) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
+      //checking if the expire time not expired and if the token is valid
         const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request);
-        console.log(token);
-        if (!token) {
+        const token = request.headers['authorization'];
+
+        const decoded = jwtDecode(token);
+        console.log(decoded.exp);
+        const currentTime = new Date();
+        if ((!token) || (decoded.exp * 1000 <= currentTime.getTime())) {
           throw new UnauthorizedException();
         }
+
         try {
           const payload = await this.jwtService.verifyAsync(
             token,
@@ -28,11 +33,6 @@ import {CanActivate, ExecutionContext, Injectable, UnauthorizedException } from 
           throw new UnauthorizedException();
         }
         return true;
-      }
-
-      private extractTokenFromHeader(request: Request): string | undefined {
-        const [type, token] = request.headers.authorization?.split(' ') ?? [];
-        return type === 'Bearer' ? token : undefined;
       }
 
   }

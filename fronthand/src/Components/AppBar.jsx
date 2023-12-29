@@ -29,7 +29,9 @@ const MenuAppBar =forwardRef((props, ref)=> {
   
   const handleAuthUser= async() => {
     try{
-    const is_accses= await  checkAuth(Cookies.get('User_token'));
+      
+      const is_accses= await  checkAuth(Cookies.get('User_token'));
+
     if(!is_accses)
     {
       navigate(dialog_pages[0].route_url);
