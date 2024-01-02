@@ -52,18 +52,7 @@ export class UserControllerService {
       throw new Error('Authentication failed');
 
   }
-  async checkUserAuth(accessToken: string) {
-    try{
-      const isValidToken = await this.AuthUser.tokenValid(accessToken);
-      console.log(isValidToken);
-     // console.log("checking" + isValidToken);
-     return isValidToken;
-    }catch(error)
-    {
-      console.log(error);
-    }
-
-  }
+  
   
 
   //delete user from database
@@ -72,7 +61,6 @@ export class UserControllerService {
 
     if (user[0] != null) return await this.user_repository.remove(user);
     else {
-      console.log('user empty');
       return {};
     }
   }

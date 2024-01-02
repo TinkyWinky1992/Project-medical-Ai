@@ -32,12 +32,12 @@ const MenuAppBar =forwardRef((props, ref)=> {
     const is_accses= await  checkAuth(Cookies.get('User_token'));
     if(!is_accses)
     {
-      navigate(dialog_pages[0].route_url);
+      navigate(dialog_pages[1].route_url);
     }
 
   }catch(error){
     console.log(error);
-    navigate(dialog_pages[0].route_url);
+    navigate(dialog_pages[1].route_url);
   }
   }
   const handleChange = (event, newValue) => {

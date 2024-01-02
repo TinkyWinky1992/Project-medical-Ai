@@ -4,6 +4,8 @@ export const routes ={
   TALK_WITH_ROBERTO: "/Talk-With-Roberto",
   YOUR_APPOINMENT: "/Appointment",
   ABOUT: "/About",
+  
+  PROFILE: "/Profile-user",
   LOGIN_REGISTER: "/Login-register",
 
 };
@@ -16,6 +18,7 @@ main_pages.push({page_name: "About", route_url: routes.ABOUT});
 
 
 export const dialog_pages = [];
+dialog_pages.push({page_name:"Profile", route_url: routes.PROFILE});
 dialog_pages.push({page_name:"Log Out", route_url: routes.LOGIN_REGISTER});
 
 

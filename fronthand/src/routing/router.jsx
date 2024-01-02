@@ -7,6 +7,7 @@ import RenderLoginOrRegister from "../Pages/login-register";
 import { createBrowserRouter } from "react-router-dom";
 import { routes } from "./routes";
 import App from "../App";
+import ProfilePage from "../Pages/Profile"
  
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: routes.ABOUT,
         element: <AboutPage />,
 
+      },
+      {
+        path: routes.PROFILE,
+        element: <ProfilePage/>,
       },
 
     ]

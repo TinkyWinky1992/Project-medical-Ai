@@ -24,6 +24,7 @@ export class UsersController {
   @UseGuards(AuthGuard)
   async isAuthUser(@Req() request: Request): Promise<boolean> {
     return !!request['user'];
+    
   }
   
 

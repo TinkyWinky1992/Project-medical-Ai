@@ -3,14 +3,14 @@ import React from "react";
 import { Grid } from "@mui/material";
 
 
-function AboutPage() {
+function ProfilePage() {
     return (
       <div className="aboutpage-screen">
         <Grid>
-          <h1>Made by yuval</h1>
+          <h1>Hi profile</h1>
         </Grid>
       </div>
     );
   }
   
-  export default AboutPage;
+  export default ProfilePage;
