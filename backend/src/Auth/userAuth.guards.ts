@@ -8,6 +8,7 @@ import {CanActivate, ExecutionContext, Injectable, UnauthorizedException } from 
     constructor(private jwtService: JwtService) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
+      //checking if the expire time not expired and if the token is valid
         const request = context.switchToHttp().getRequest();
         const token = request.headers['authorization'];
         console.log(token);
@@ -19,6 +20,7 @@ import {CanActivate, ExecutionContext, Injectable, UnauthorizedException } from 
         if ((!token) || (decoded.exp * 1000 <= currentTime.getTime()) ) {
           throw new UnauthorizedException();
         }
+
         try {
           const payload = await this.jwtService.verifyAsync(
             token,

@@ -19,7 +19,7 @@ export const postUser = async (username_temp, email_temp, password_temp) => {
 export const getUser = async (email_or_username, password ) => {
   try {
       const response = await axios.get(`http://localhost:5000/users/getusers?email-or-username=${email_or_username}&password=${password}`);
-      console.log(response.data);
+      
       return response.data;
   } catch (error) {
       console.error("Error while making the GET request:", error);
@@ -29,10 +29,12 @@ export const getUser = async (email_or_username, password ) => {
 
 export const checkAuth = async (token) =>{
   try {
-    //console.log(token);
+    console.log("cookieee " + token);
     const response = await axios.get(`http://localhost:5000/users/AuthUser`,{
       headers: {
+
         Authorization: token,
+
       }
 
     });

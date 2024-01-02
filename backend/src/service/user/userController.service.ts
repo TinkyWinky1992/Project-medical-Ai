@@ -52,8 +52,13 @@ export class UserControllerService {
       throw new Error('Authentication failed');
 
   }
-  
-  
+
+
+}
+
+
+/*
+
 
   //delete user from database
   async deleteUser(id: number) {
@@ -64,25 +69,4 @@ export class UserControllerService {
       return {};
     }
   }
-}
-
-
-
-
-/*
-  //------------------------------------------------------------checking usesr details..
-
-  
-    if (!user) 
-    throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
-
-  // checking password length
-  if (password.length <= 6) 
-    throw new HttpException('Password needs to be above 6 letters.', HttpStatus.BAD_REQUEST);
-
-  const isMatchPassword = await bcrypt.compare(password, user.password);
-  if (!isMatchPassword) 
-    throw new HttpException('Password incorrect.', HttpStatus.BAD_REQUEST);
-  //------------------------------------------------------------
-
-*/
+  */
