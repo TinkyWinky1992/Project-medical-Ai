@@ -13,7 +13,7 @@ export class UserService {
     private user_repository: Repository<UserEntite>,
   ) {}
 
-//boolean
+
   async isemailExist(email: string): Promise<boolean> {
     const user = await this.user_repository.findOneBy({ email: email });
     return !!user;
@@ -30,7 +30,7 @@ export class UserService {
     return !!isMatch_password
   }
 
-  //gets
+  
   async getUserByEmail(email: string): Promise<AccountParam> {
     const user = await this.user_repository.findOneBy({ email: email });
     return user;

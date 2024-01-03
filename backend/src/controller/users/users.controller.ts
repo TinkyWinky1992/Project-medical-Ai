@@ -1,4 +1,4 @@
-import { Controller, Get, Post , Query, Body, UseGuards, Req} from '@nestjs/common';
+import { Controller, Get, Post, Param , Query, Body, UseGuards, Req, Delete} from '@nestjs/common';
 import { AuthGuard } from '../../Auth/userAuth.guards';
 import { AccountDto } from '../../Dto/AccountDto';
 import { UserControllerService } from '../../service/user/UserController.service';
@@ -7,12 +7,13 @@ import { UserControllerService } from '../../service/user/UserController.service
 export class UsersController {
   constructor(private userService: UserControllerService) {}
 
- 
+ //creating user and post it to the database
   @Post('create')
   async CreateUser(@Body() AccountDto: AccountDto) {
     return await this.userService.createUser(AccountDto);
 
   }
+  //get user from database by the email or username
   @Get('getusers')
   async getUserFromDataBase(@Query('email-or-username') email_username: string,@Query('password') pass: string){
     return await this.userService.getUser(email_username, pass);
@@ -26,7 +27,6 @@ export class UsersController {
     return !!request['user'];
     
   }
-  
 
 }
   /*

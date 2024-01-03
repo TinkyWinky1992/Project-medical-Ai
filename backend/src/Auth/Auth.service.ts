@@ -6,9 +6,7 @@ import { jwtConstants } from './Constants';
 @Injectable()
 export class AuthService{
     constructor(private jwtService: JwtService) {}
-
-
-    
+//creating for user access token  
     async loginAuth(user:UserEntite ) {
         const payload= {sub: user.id, username: user.username}
         return {

@@ -16,7 +16,7 @@ export class UserControllerService {
   ) {}
 
   //creating user and put it in the user repository
-  async createUser(accountDetails: AccountParam) {
+  async createUser(accountDetails: AccountParam): Promise<{accsesToken: string}>  {
     const saltOrRounds = await bcrypt.genSalt(); // the cost factor (the amount of time )for calculating the hash, the higher the number the more complicated the hash be
     accountDetails.password = await bcrypt.hash(
       accountDetails.password,
@@ -27,7 +27,7 @@ export class UserControllerService {
     const token = await this.AuthUser.loginAuth(new_user_entite)
 
     if (token && token.access_token) 
-      return this.user_repository.save(new_user_entite);
+      return {accsesToken: token.access_token};
     else 
       throw new Error('Authentication failed');
     
@@ -53,14 +53,12 @@ export class UserControllerService {
 
   }
 
-
 }
 
 
 /*
 
 
-  //delete user from database
   async deleteUser(id: number) {
     const user = await this.user_repository.find({ where: { id: id } });
 
@@ -69,4 +67,6 @@ export class UserControllerService {
       return {};
     }
   }
+  //delete user from database
+
   */
