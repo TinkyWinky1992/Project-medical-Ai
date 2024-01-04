@@ -14,7 +14,7 @@ export class UsersController {
 
   }
   //get user from database by the email or username
-  @Get('getusers')
+  @Get('loginUser')
   async getUserFromDataBase(@Query('email-or-username') email_username: string,@Query('password') pass: string){
     return await this.userService.getUser(email_username, pass);
   }
@@ -24,7 +24,8 @@ export class UsersController {
   @Get('AuthUser')
   @UseGuards(AuthGuard)
   async isAuthUser(@Req() request: Request): Promise<boolean> {
-    return !!request['user'];
+    //console.log("User");
+    return request['user'];
     
   }
 

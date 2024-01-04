@@ -27,7 +27,7 @@ export class UserModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(UserRegisterMiddleware).forRoutes('users/create');
     consumer.apply(UserLoggerMiddleware).forRoutes('users');
-    consumer.apply(UserLoginMiddleware).forRoutes({path: 'users/getusers', method: RequestMethod.ALL});
+    consumer.apply(UserLoginMiddleware).forRoutes({path: 'users/loginUser', method: RequestMethod.ALL});
     
   }
 }

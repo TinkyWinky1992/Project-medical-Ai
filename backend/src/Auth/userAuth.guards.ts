@@ -1,7 +1,7 @@
 import {CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
   import { JwtService } from '@nestjs/jwt';
   import { jwtConstants } from './Constants';
-  import {jwtDecode} from 'jwt-decode';
+  import { jwtDecode } from 'jwt-decode';
    
   @Injectable()
   export class AuthGuard implements CanActivate {
@@ -11,7 +11,7 @@ import {CanActivate, ExecutionContext, Injectable, UnauthorizedException } from 
       //checking if the expire time not expired and if the token is valid
         const request = context.switchToHttp().getRequest();
         const token = request.headers['authorization'];
-        console.log(token);
+        
 
         const decoded = jwtDecode(token);
         console.log(decoded);

@@ -1,7 +1,7 @@
 import "../style/LoginStyle.css";
 import Cookies from 'js-cookie';
 import React, { useRef } from "react";
-import { getUser } from "../Services/ServerHandler";
+import { loginUser } from "../Services/ServerHandler";
 import { Grid, Typography, Button } from "@mui/material";
 import { InputPasswordField, InputEmailOrUsernameField } from "./TextField-comps";
 import { main_pages } from "../routing/routes";
@@ -18,10 +18,10 @@ const RenderLogin = () => {
     try {
       //getting the jwt token for authication route. 
       //to give the user premission to accses most of the routes
-      token_jwt = await getUser(input_email_username_ref.current.text, input_password_ref.current.text);
-      //console.log(token_jwt.accsesToken);
+      token_jwt = await loginUser(input_email_username_ref.current.text, input_password_ref.current.text);
       Cookies.set('User_token', token_jwt.accsesToken);
       navigate(main_pages[0].route_url);
+      
     }catch(error) {
       if (error.response) {
         const mesg = error.response.data.message;

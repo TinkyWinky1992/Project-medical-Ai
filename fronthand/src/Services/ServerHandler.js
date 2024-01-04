@@ -16,9 +16,9 @@ export const postUser = async (username_temp, email_temp, password_temp) => {
   }
 };
 
-export const getUser = async (email_or_username, password ) => {
+export const loginUser = async (email_or_username, password ) => {
   try {
-      const response = await axios.get(`http://localhost:5000/users/getusers?email-or-username=${email_or_username}&password=${password}`);
+      const response = await axios.get(`http://localhost:5000/users/loginUser?email-or-username=${email_or_username}&password=${password}`);
       
       return response.data;
   } catch (error) {
@@ -38,6 +38,7 @@ export const checkAuth = async (token) =>{
       }
 
     });
+
     return response.data;
 } catch (error) {
     console.error("Error while making the GET request:", error);
