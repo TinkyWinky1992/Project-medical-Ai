@@ -31,6 +31,7 @@ const InputEmailField = forwardRef((props, ref) => {
       onChange={InputUserHandler}
       error={!isValid}
       color="warning"
+      inputProps={{ style: { color: isValid ? 'white' : 'red' } }} 
       helperText={!isValid ? errormsg : ""}
     />
   );
@@ -58,15 +59,17 @@ const InputUsernameField = forwardRef((props, ref) => {
 
   return (
     <TextField
+      
       InputLabelProps={{ className: "userfield" }}
       label="Enter Your Username"
-      style={{ padding: 10 }}
+      style={{ padding: 10, color: "white"}}
       fullWidth
       variant="outlined"
       value={inputUserValue}
       onChange={InputUserHandler}
       error={!isValid}
       color="warning"
+      inputProps={{ style: { color: isValid ? 'white' : 'red' } }} 
       helperText={!isValid ? errormsg : ""}
     />
   );

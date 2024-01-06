@@ -6,7 +6,7 @@ import { checkAuth } from "../Services/ServerHandler";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Avatar from '@mui/material/Avatar';  
-import { InputEmailField, InputUsernameField, InputPasswordField} from "../Components/TextField-comps";
+import { InputEmailField, InputUsernameField} from "../Components/TextField-comps";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 
@@ -51,11 +51,9 @@ function ProfilePage() {
           <Container fixed maxWidth="sm">
               <InputEmailField/>
               <InputUsernameField/>
-              <InputPasswordField/>
           </Container>
 
             
-
         </Grid>
 
 
