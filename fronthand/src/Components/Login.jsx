@@ -1,4 +1,4 @@
-import "../style/LoginStyle.css";
+import "../StyleElements/style/LoginStyle.css";
 import Cookies from 'js-cookie';
 import React, { useRef } from "react";
 import { loginUser } from "../Services/ServerHandler";

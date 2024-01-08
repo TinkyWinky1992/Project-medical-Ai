@@ -32,8 +32,24 @@ export class UserControllerService {
       throw new Error('Authentication failed');
     
   }
+  async getUser(email_or_username: string){
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    let user = new UserEntite();
 
-  async getUser(email_or_username: string, password:string): Promise<{accsesToken: string}> {
+    if (emailRegex.test(email_or_username)) 
+    user = await this.user_repository.findOne({ where: { email: email_or_username } });
+  
+    else 
+      user = await this.user_repository.findOne({ where: { username: email_or_username } });
+    if(user)
+      return user;
+
+    else
+      throw new Error('find user failed');
+
+  }
+
+  async loginUserTodataBase(email_or_username: string, password:string): Promise<{accsesToken: string}> {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     let user = new UserEntite();
     

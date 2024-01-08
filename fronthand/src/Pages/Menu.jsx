@@ -1,4 +1,4 @@
-import "../style/menuStyle.css"
+import "../StyleElements/style/menuStyle.css"
 import React from "react";
 import { Grid } from "@mui/material";
 

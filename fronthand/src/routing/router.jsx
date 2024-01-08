@@ -7,12 +7,17 @@ import RenderLoginOrRegister from "../Pages/login-register";
 import { createBrowserRouter } from "react-router-dom";
 import { routes } from "./routes";
 import App from "../App";
-import ProfilePage from "../Pages/Profile"
+import ProfilePage from "../Pages/UserSettingsPages/Profile"
  
 const router = createBrowserRouter([
   {
     path: routes.LOGIN_REGISTER,
     element: <RenderLoginOrRegister/>,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: routes.PROFILE,
+    element: <ProfilePage/>,
     errorElement: <ErrorPage />,
   },
 
@@ -46,10 +51,7 @@ const router = createBrowserRouter([
         element: <AboutPage />,
 
       },
-      {
-        path: routes.PROFILE,
-        element: <ProfilePage/>,
-      },
+
 
     ]
   },

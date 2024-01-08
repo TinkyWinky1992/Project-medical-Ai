@@ -1,9 +1,12 @@
-import "../style/LoginStyle.css";
+
 import { TextField } from "@mui/material";
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, { useState, forwardRef, useImperativeHandle} from "react";
+
 
 const InputEmailField = forwardRef((props, ref) => {
   const [inputUserValue, setInputUserValue] = useState("");
+
+  const [label, setLabel] = useState("Enter Your Email");
   const [isValid, setIsValid] = useState(true);
   const [errormsg, setErrormsg] = useState("Invalid input");
 
@@ -18,12 +21,14 @@ const InputEmailField = forwardRef((props, ref) => {
     error: isValid,
     setValid: setIsValid,
     text: inputUserValue,
+    inputText: setInputUserValue,
+    label: setLabel,
     errormsg: setErrormsg,
   }));
   return (
     <TextField
       InputLabelProps={{ className: "userfield" }}
-      label="Enter Your Email"
+      label={label}
       style={{ padding: 10 }}
       fullWidth
       variant="outlined"
@@ -31,6 +36,7 @@ const InputEmailField = forwardRef((props, ref) => {
       onChange={InputUserHandler}
       error={!isValid}
       color="warning"
+      
       inputProps={{ style: { color: isValid ? 'white' : 'red' } }} 
       helperText={!isValid ? errormsg : ""}
     />
@@ -39,6 +45,8 @@ const InputEmailField = forwardRef((props, ref) => {
 
 const InputUsernameField = forwardRef((props, ref) => {
   const [inputUserValue, setInputUserValue] = useState("");
+  const [label, setLabel] = useState("Enter Your Usernmae");
+
   const [isValid, setIsValid] = useState(true);
   const [errormsg, setErrormsg] = useState("Invalid input");
   
@@ -54,6 +62,9 @@ const InputUsernameField = forwardRef((props, ref) => {
     error: isValid,
     setValid: setIsValid,
     text: inputUserValue,
+    inputText: setInputUserValue,
+    label: setLabel,
+    
     errormsg: setErrormsg,
   }));
 
@@ -61,7 +72,7 @@ const InputUsernameField = forwardRef((props, ref) => {
     <TextField
       
       InputLabelProps={{ className: "userfield" }}
-      label="Enter Your Username"
+      label={label}
       style={{ padding: 10, color: "white"}}
       fullWidth
       variant="outlined"

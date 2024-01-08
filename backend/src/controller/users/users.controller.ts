@@ -15,8 +15,13 @@ export class UsersController {
   }
   //get user from database by the email or username
   @Get('loginUser')
-  async getUserFromDataBase(@Query('email-or-username') email_username: string,@Query('password') pass: string){
-    return await this.userService.getUser(email_username, pass);
+  async loginUserFromDataBase(@Query('email-or-username') email_username: string,@Query('password') pass: string){
+    return await this.userService.loginUserTodataBase(email_username, pass);
+  }
+
+  @Get('getUser')
+  async getUserFromDataBase(@Query('email-or-username') email_username: string){
+    return await this.userService.getUser(email_username);
   }
 
    // The user payload is attached to the request object by AuthGuard

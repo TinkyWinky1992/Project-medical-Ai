@@ -15,7 +15,16 @@ export const postUser = async (username_temp, email_temp, password_temp) => {
     throw error; // Rethrow the error for further handling if needed
   }
 };
+export const getUser = async (username) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/users/getUser?email-or-username=${username}`);
+    return response.data;
 
+  }catch(error){
+    console.error("Error while making the GET request:", error);
+    throw error;
+  }
+};
 export const loginUser = async (email_or_username, password ) => {
   try {
       const response = await axios.get(`http://localhost:5000/users/loginUser?email-or-username=${email_or_username}&password=${password}`);
@@ -29,7 +38,6 @@ export const loginUser = async (email_or_username, password ) => {
 
 export const checkAuth = async (token) =>{
   try {
-    console.log("cookieee " + token);
     const response = await axios.get(`http://localhost:5000/users/AuthUser`,{
       headers: {
 
