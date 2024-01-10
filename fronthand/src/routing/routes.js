@@ -6,6 +6,8 @@ export const routes ={
   ABOUT: "/About",
   
   PROFILE: "/Profile-user",
+  LOCATION: "/Profile-user/location",
+  
   LOGIN_REGISTER: "/Login-register",
 
 };
@@ -23,6 +25,7 @@ dialog_pages.push({page_name:"Log Out", route_url: routes.LOGIN_REGISTER});
 
 export const settings_pages= [];
 settings_pages.push({page_name:"Profile", route_url: routes.PROFILE});
+settings_pages.push({page_name:"Location Setting", route_url: routes.LOCATION})
 
 
 

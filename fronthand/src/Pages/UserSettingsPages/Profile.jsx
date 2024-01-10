@@ -10,8 +10,9 @@ import { checkAuth, getUser } from "../../Services/ServerHandler";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { customTheme } from "../../StyleElements/TextFieldStyle";
-import MenuAppBar from "../../Components/AppBar";
-
+import UserAppBar from "../../Components/UserAppBar";
+import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
 
 function ProfilePage() {
   const outerTheme = useTheme();
@@ -48,10 +49,10 @@ function ProfilePage() {
   const ChangePhoto =()=>{
 
   }
-  
+
     return (
-      <div className="aboutpage-screen">
-        <MenuAppBar/>
+      <div className="profile-screen">
+        <UserAppBar/>
         <Grid
           container
           spacing={0}
@@ -72,12 +73,20 @@ function ProfilePage() {
               <InputEmailField ref={input_email_ref}/>
               <InputUsernameField ref={input_username_ref}/>
             </ThemeProvider>
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ minHeight: '10vh' }}>
+                <Button sx={{ minWidth: '60vh',borderRadius:'10px' }} variant="contained" color="success" 
+                >CHANGE</Button>
+            </Grid>
+            
           </Container>
-
             
         </Grid>
-
-
       </div>
     );
   }

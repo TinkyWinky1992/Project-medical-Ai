@@ -33,8 +33,6 @@ function LocationPage() {
         input_username_ref.current.label("Your Username");
         input_username_ref.current.inputText(user.username);
 
-
-  
       } catch (error) {
         console.log(error);
         navigate(dialog_pages[1].route_url);
@@ -45,12 +43,12 @@ function LocationPage() {
 
   }, []);
 
-  const ChangePhoto =()=>{
+  const ChangePhoto = ()=>{
 
   }
   
     return (
-      <div className="aboutpage-screen">
+      <div className="loaction-screen">
         <MenuAppBar/>
         <Grid
           container
@@ -76,7 +74,6 @@ function LocationPage() {
 
             
         </Grid>
-
 
       </div>
     );

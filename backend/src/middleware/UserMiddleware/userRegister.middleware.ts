@@ -26,10 +26,6 @@ export class UserRegisterMiddleware implements NestMiddleware {
       
     if(emailExist) 
       throw new HttpException('Email is already in use.', HttpStatus.BAD_REQUEST)
-    
-    //checking password above 6 letters
-    if(userInput.password.length <= 6)
-      throw new HttpException('Password need to be above 6 letters.', HttpStatus.BAD_REQUEST)
 
     next();
   }

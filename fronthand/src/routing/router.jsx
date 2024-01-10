@@ -3,6 +3,7 @@ import Menu from "../Pages/Menu";
 import RenderChatbox from "../Pages/ChatBoxWithAi";
 import AppointmentPage from "../Pages/Appoinment";
 import AboutPage from "../Pages/About";
+import LocationPage from "../Pages/UserSettingsPages/location";
 import RenderLoginOrRegister from "../Pages/login-register";
 import { createBrowserRouter } from "react-router-dom";
 import { routes } from "./routes";
@@ -15,11 +16,20 @@ const router = createBrowserRouter([
     element: <RenderLoginOrRegister/>,
     errorElement: <ErrorPage />,
   },
+
   {
     path: routes.PROFILE,
     element: <ProfilePage/>,
     errorElement: <ErrorPage />,
+    children:[
+      {
+        path: routes.LOCATION,
+        element: <LocationPage/>,
+      },
+      
+    ]
   },
+
 
   {
     path: routes.MAIN,

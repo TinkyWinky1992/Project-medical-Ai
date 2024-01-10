@@ -50,12 +50,6 @@ export class UserLoginMiddleware implements NestMiddleware {
     if (!user) throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
 
 
-    if (userInput.password.length <= 6)
-      throw new HttpException(
-        'Password needs to be above 6 letters.',
-        HttpStatus.BAD_REQUEST,
-      );
-
     //checking the password if it correct.
     const isMatchPassword = await this.userService.comparePassword(
       userInput.password,
