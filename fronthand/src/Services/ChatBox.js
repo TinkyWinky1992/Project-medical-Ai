@@ -1,7 +1,13 @@
-import { useRef } from "react";
+import { useRef, useEffect} from "react";
 import { scrollingDown } from "../utils/ChatUtil";
 import Ai from "./Ai";
+import {startConversation, } from "./ServerHandler"
 function AiChatBox() {
+  useEffect(() =>{
+    startConversation()
+
+
+  }, [])
   const ai = new Ai();
   const user_output_ref = useRef();
   const ai_output_ref = useRef();
