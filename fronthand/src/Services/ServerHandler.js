@@ -24,18 +24,17 @@ export const startConversation = async () => {
 
 
 
-export const Conversation = async(message) =>{
-  try{
-      const response = await axios.get("http://localhost:5001/getMessage",{
-      messageToDoctor : message
-    })
-    return response.data
-  }catch(error){
+export const Conversation = async (message) => {
+  try {
+    const response = await axios.get(`http://localhost:5001/getMessage?messageToDoctor=${message}`);
+    console.log("Data: ",response.data);
+    return response.data;
+  } catch (error) {
     console.error("Error while making the Get request:", error);
+    // Handle error gracefully (display error message)
+    return { error: "An error occurred. Please try again later." };
   }
-
-}
-
+};
 export const postUser = async (username_temp, email_temp, password_temp) => {
   try {
     const response = await axios.post("http://localhost:5000/users/create", {

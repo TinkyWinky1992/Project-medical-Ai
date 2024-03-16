@@ -1,7 +1,7 @@
 import { useRef, useEffect} from "react";
 import { scrollingDown } from "../utils/ChatUtil";
 import Ai from "./Ai";
-import {startConversation, } from "./ServerHandler"
+import {startConversation, Conversation} from "./ServerHandler"
 function AiChatBox() {
   useEffect(() =>{
     startConversation()
@@ -16,12 +16,13 @@ function AiChatBox() {
 
   // hello this is a recent change
   const onSendMessage = async (onclikc_function) => {
-    if (textarea_ref.current.value == "") return;
+    if (textarea_ref.current.value == "") 
+      return;
 
     const message_output = user_output_ref.current.cloneNode(true);
     message_output.style.display = "flex";
     message_output.textContent = textarea_ref.current.value;
-
+    
     chatbox_ref.current.appendChild(message_output);
     textarea_ref.current.value = "";
 
@@ -29,13 +30,9 @@ function AiChatBox() {
       chatbox_ref.current.scrollTop + chatbox_ref.current.clientHeight ===
       chatbox_ref.current.scrollHeight;
     if (!should_scroll) scrollingDown(chatbox_ref);
-
-    ai.AichatRespone(
-      onclikc_function,
-      ai_output_ref,
-      message_output,
-      chatbox_ref
-    );
+    console.log(message_output)
+    ai.AichatRespone(onclikc_function,ai_output_ref,message_output,chatbox_ref);
+    
   };
 
   return {

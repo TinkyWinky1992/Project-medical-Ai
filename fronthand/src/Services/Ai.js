@@ -10,11 +10,11 @@ function Ai() {
 
   const AichatRespone = async (e, ai_output, user_output, chatbox) => {
     e.stopPropagation();
-    const message = await Conversation(user_output);
 
+    const message = await Conversation(user_output.textContent);
     const message_output = ai_output.current.cloneNode(true);
     message_output.style.display = "flex";
-    message_output.textContent = message;
+    message_output.textContent = message.message["response"];
 
     chatbox.current.appendChild(message_output);
 
