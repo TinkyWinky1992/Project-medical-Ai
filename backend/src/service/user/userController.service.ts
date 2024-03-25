@@ -26,8 +26,10 @@ export class UserControllerService {
     const new_user_entite: UserEntite = this.user_repository.create({...accountDetails});
     const token = await this.AuthUser.loginAuth(new_user_entite)
 
-    if (token && token.access_token) 
+    if (token && token.access_token) {
+      await this.user_repository.save(new_user_entite)
       return {accsesToken: token.access_token};
+    }
     else 
       throw new Error('Authentication failed');
     
