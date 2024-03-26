@@ -17,7 +17,6 @@ build/
 
 # Ignore log files
 *.log
-*.module_name
-.module_name
+
 # Ignore npm-specific files
 package-lock.json   
