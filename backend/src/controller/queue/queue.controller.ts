@@ -15,7 +15,7 @@ export class QueueController {
   
   @Get('getAppointment')
   async getAppointment(@Query('username') username: string,@Query('email') email: string){
-    
+    return await this.queueService.findUserAppointment(username, email);
 
   }
 }

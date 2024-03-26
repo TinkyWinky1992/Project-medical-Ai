@@ -22,8 +22,14 @@ export class QueueService {
       return await this.queueRepository.save(queue);
     }
 
-    async findUserAppointment(): Promise<any[]>{
-      
-      return []
+    async findUserAppointment(username: string, email: string): Promise<any[]>{ 
+      const appointments = await this.queueRepository.find({
+        where: {
+            username: username,
+            email: email
+        }
+    });
+    
+    return appointments;
     }
 }

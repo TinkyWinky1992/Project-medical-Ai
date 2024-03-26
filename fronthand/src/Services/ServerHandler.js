@@ -2,7 +2,7 @@
 import axios from "axios";
 export const getFromDataBaseUserAppointments = async(username, email) => {
   try {
-    const response = await axios.get(`http://localhost:5000/getAppointment?username=${username}&email=${email}`);
+    const response = await axios.get(`http://localhost:5000/queue/getAppointment?username=${username}&email=${email}`);
     console.log(response.data);
     return response.data;
   } catch (error) {
