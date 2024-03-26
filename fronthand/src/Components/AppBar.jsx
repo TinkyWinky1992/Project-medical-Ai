@@ -37,6 +37,7 @@ const MenuAppBar = forwardRef((props, ref) => {
   };
 
   const handleChange = (event, newValue) => {
+    
     setSelectedPage(newValue);
     navigate(main_pages[newValue].route_url);
   };
@@ -47,7 +48,13 @@ const MenuAppBar = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     setSelectedTab: (newValue) => {
-      setSelectedPage(newValue);
+      try{
+        setSelectedPage(newValue);
+      }catch(error)
+      {
+        console.log(error)
+      }
+      
     }
   }));
   

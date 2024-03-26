@@ -7,8 +7,10 @@ function App() {
   const menubar_ref = useRef()
   let location = useLocation();
   useEffect(() => {
-    const index = main_pages.findIndex(page => page.route_url === location.pathname)
-    menubar_ref.current.setSelectedTab(index)
+
+      const index = main_pages.findIndex(page => page.route_url === location.pathname)
+      menubar_ref.current.setSelectedTab(index)
+
   });
   
   return (
