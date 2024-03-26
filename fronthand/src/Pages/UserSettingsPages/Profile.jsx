@@ -1,4 +1,6 @@
 import { dialog_pages } from "../../routing/routes";
+import { settings_pages } from "../../routing/routes";
+import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef} from "react";
 import { IconButton } from "@mui/material";
 import Container from '@mui/material/Container';
@@ -12,20 +14,27 @@ import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { customTheme } from "../../StyleElements/TextFieldStyle";
 import UserAppBar from "../../Components/UserAppBar";
 import Button from '@mui/material/Button';
-import Typography from "@mui/material/Typography";
 
 function ProfilePage() {
   const outerTheme = useTheme();
   const navigate = useNavigate();
   const input_email_ref = useRef();
   const input_username_ref = useRef();
-  
+
+  let location = useLocation();
+  const profilebar_ref= useRef();
+
   useEffect(() => {
+    console.log(location.pathname);
+    const index = settings_pages.findIndex(page => page.route_url === location.pathname)
+    console.log(index)
+    profilebar_ref.current.setSelectedTab(index)
+
     const fetchUserData = async () => {
       try {
         const token_user = await checkAuth(Cookies.get('User_token'));
         const user = await getUser(token_user.username);
-        console.log(user);
+        
         input_email_ref.current.setValid(true);
         input_email_ref.current.label("Your Email");
         input_email_ref.current.inputText(user.email);
@@ -52,7 +61,7 @@ function ProfilePage() {
 
     return (
       <div className="profile-screen">
-        <UserAppBar/>
+        <UserAppBar ref={profilebar_ref}/>
         <Grid
           container
           spacing={0}

@@ -12,4 +12,10 @@ export class QueueController {
     console.log(queueDto);
     return await this.queueService.createQueue(queueDto);
   }
+  
+  @Get('getAppointment')
+  async getAppointment(@Query('username') username: string,@Query('email') email: string){
+    
+
+  }
 }

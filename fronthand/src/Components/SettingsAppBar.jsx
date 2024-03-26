@@ -15,6 +15,8 @@ import { Tab, Tabs } from "@mui/material";
 import { main_pages, dialog_pages } from "../routing/routes";
 import Cookies from 'js-cookie';
 import { checkAuth } from "../Services/ServerHandler";
+
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -46,9 +48,9 @@ const UserAppBar =forwardRef((props, ref)=> {
   const handleOpenUserDialog = (event) => {
     userAnchor_ref.current.openAnchor(event.currentTarget);
   };
-
+  
   useImperativeHandle(ref, () => ({
-    
+
   }));
   
   return (

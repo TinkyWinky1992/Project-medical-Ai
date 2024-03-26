@@ -1,12 +1,19 @@
 import { useRef, useEffect} from "react";
 import { scrollingDown } from "../utils/ChatUtil";
 import Ai from "./Ai";
-import {startConversation, Conversation} from "./ServerHandler"
+import {startConversation, checkAuth, getUser} from "./ServerHandler"
+import Cookies from "js-cookie";
 function AiChatBox() {
+
   useEffect(() =>{
-    startConversation()
 
-
+    const fetchData = async () => {
+      const token_user = await checkAuth(Cookies.get('User_token'));
+      const user = await getUser(token_user.username);
+      console.log(user)
+      startConversation(user.username, user.email)
+    }
+    fetchData()
   }, [])
   const ai = new Ai();
   const user_output_ref = useRef();

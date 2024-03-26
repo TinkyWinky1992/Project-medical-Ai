@@ -15,40 +15,40 @@ import { Tab, Tabs } from "@mui/material";
 import { main_pages, dialog_pages } from "../routing/routes";
 import Cookies from 'js-cookie';
 import { checkAuth } from "../Services/ServerHandler";
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
 });
 
-const MenuAppBar =forwardRef((props, ref)=> {
-  
+const MenuAppBar = forwardRef((props, ref) => {
   const userAnchor_ref = useRef();
   const [selectedPage, setSelectedPage] = useState(0);
   const navigate = useNavigate();
-  
-  const handleAuthUser= async() => {
-    try{  
-      const accses= await checkAuth(Cookies.get('User_token'));
 
-  }catch(error){
-    console.log(error);
-    navigate(dialog_pages[1].route_url);
-  }
-  }
+  const handleAuthUser = async () => {
+    try {  
+      const access = await checkAuth(Cookies.get('User_token'));
+    } catch(error) {
+      console.log(error);
+      navigate(dialog_pages[1].route_url);
+    }
+  };
+
   const handleChange = (event, newValue) => {
     setSelectedPage(newValue);
     navigate(main_pages[newValue].route_url);
-
   };
 
-  
   const handleOpenUserDialog = (event) => {
     userAnchor_ref.current.openAnchor(event.currentTarget);
   };
 
   useImperativeHandle(ref, () => ({
-    
+    setSelectedTab: (newValue) => {
+      setSelectedPage(newValue);
+    }
   }));
   
   return (
@@ -77,27 +77,24 @@ const MenuAppBar =forwardRef((props, ref)=> {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Tabs value={selectedPage} onChange={handleChange}>
                 {main_pages.map((page, index) => ( 
-                    <Tab
-                      onClick={async()=>{handleAuthUser()}}
-                      key={index}
-                      label={page.page_name}
-                      sx={{
-                        my: 2,
-                        margin: 1,
-                        color: "white",
-                        display: "block",
-                        fontFamily: "monospace",
-                        fontSize: 16,
-                        fontWeight: 700,
-                        transition: "transform 0.2s",
-                        "&:hover": {
-                          transform: "translateY(-4px)",
-                        },
-                      }}
-                    >
-                      {page.page_name}
-                    </Tab>
-                  
+                  <Tab
+                    onClick={async () => { handleAuthUser() }}
+                    key={index}
+                    label={page.page_name}
+                    sx={{
+                      my: 2,
+                      margin: 1,
+                      color: "white",
+                      display: "block",
+                      fontFamily: "monospace",
+                      fontSize: 16,
+                      fontWeight: 700,
+                      transition: "transform 0.2s",
+                      "&:hover": {
+                        transform: "translateY(-4px)",
+                      },
+                    }}
+                  />
                 ))}
               </Tabs>
             </Box>
@@ -115,4 +112,5 @@ const MenuAppBar =forwardRef((props, ref)=> {
     </AppBar>
   );
 });
+
 export default MenuAppBar;

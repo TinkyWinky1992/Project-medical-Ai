@@ -21,4 +21,9 @@ export class QueueService {
       const queue = this.queueRepository.create({ ...QueueDetails, user });
       return await this.queueRepository.save(queue);
     }
+
+    async findUserAppointment(): Promise<any[]>{
+      
+      return []
+    }
 }

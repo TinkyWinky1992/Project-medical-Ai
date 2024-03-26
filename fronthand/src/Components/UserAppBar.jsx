@@ -50,7 +50,9 @@ const UserAppBar =forwardRef((props, ref)=> {
   };
 
   useImperativeHandle(ref, () => ({
-    
+      setSelectedTab: (newValue) => {
+        setSelectedPage(newValue);
+    }
   }));
   
   return (

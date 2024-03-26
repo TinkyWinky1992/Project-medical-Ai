@@ -1,20 +1,19 @@
 //
 import axios from "axios";
-
-export const listenToGetAppointment = async () => {
+export const getFromDataBaseUserAppointments = async(username, email) => {
   try {
-    const response = await axios.get('http://localhost:5001/getAppointment');
-    console.log('Response from server:', response.data);
+    const response = await axios.get(`http://localhost:5000/getAppointment?username=${username}&email=${email}`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error('Error:', error);
-    setTimeout(listenToGetAppointment, 100); // Corrected from listenToServer to listenToGetAppointment
+    console.error("Error while making the Get request:", error);
   }
-};
+}
 
-export const startConversation = async () => {
+
+export const startConversation = async (username, email) => {
   try {
-    const response = await axios.get("http://localhost:5001/");
+    const response = await axios.get(`http://localhost:5001/?username=${username}&email=${email}`);
     console.log(response.data);
     return response.data;
   } catch (error) {

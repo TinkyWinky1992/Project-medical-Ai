@@ -10,7 +10,6 @@ import { checkAuth, getUser } from "../../Services/ServerHandler";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { customTheme } from "../../StyleElements/TextFieldStyle";
-import MenuAppBar from "../../Components/AppBar";
 
 
 function LocationPage() {
@@ -49,7 +48,6 @@ function LocationPage() {
   
     return (
       <div className="loaction-screen">
-        <MenuAppBar/>
         <Grid
           container
           spacing={0}
