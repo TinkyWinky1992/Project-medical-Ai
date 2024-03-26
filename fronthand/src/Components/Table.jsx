@@ -11,7 +11,7 @@ const columns = [
 ];
     
 const getAppointments = (user) =>{
-    
+    //fasfasf
 }
 
 export const AppointmentTable = () => {
