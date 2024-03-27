@@ -8,6 +8,7 @@ import { UserEntite } from 'src/TypeOrm/entities/user';
 
 @Injectable()
 export class QueueService {
+
   private DateHash: HashTable<Date> = {};
 
   constructor(
@@ -41,10 +42,22 @@ export class QueueService {
     });
     return appointments;
   }
+  async deleteQueue(id: number) {
+    try {
+      await this.queueRepository.delete(id);
+    } catch (error) {
+      // Handle errors
+      console.error(`Error deleting queue with ID ${id}:`, error);
+      throw new Error(`Failed to delete queue with ID ${id}`);
+    }
+  }
 
   async pushToHash(id: number): Promise<string> {
     const currentDate: Date = new Date();
-    const formattedDate: string = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear() % 100}`;
+    const day = Math.floor(Math.random() * (31 - currentDate.getDate() + 1)) + currentDate.getDate();
+    const month = Math.floor(Math.random() * (12 - currentDate.getMonth() + 1)) + currentDate.getMonth();
+
+    const formattedDate: string = `${day}/${month}/${currentDate.getFullYear() % 100}`;
     console.log(formattedDate);
     this.DateHash[id] = currentDate; // Storing Date object in DateHash
     return formattedDate;

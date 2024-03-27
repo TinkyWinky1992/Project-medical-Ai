@@ -18,4 +18,11 @@ export class QueueController {
     return await this.queueService.findUserAppointment(username, email);
 
   }
+
+  @Delete('delete')
+  async deleteUser(@Query('id') id: number) {
+    console.log(id)
+    await this.queueService.deleteQueue(id);
+
+  }
 }
