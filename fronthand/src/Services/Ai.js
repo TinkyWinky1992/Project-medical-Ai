@@ -14,7 +14,7 @@ function Ai() {
     const message = await Conversation(user_output.textContent);
     const message_output = ai_output.current.cloneNode(true);
     message_output.style.display = "flex";
-    message_output.textContent = message.message["response"];
+    message_output.textContent = message["message"];
 
     chatbox.current.appendChild(message_output);
 

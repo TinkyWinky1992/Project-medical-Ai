@@ -19,6 +19,9 @@ export class QueueEntites {
     @Column()
     email: string
 
+    @Column()
+    Your_Appointment_Date: string;
+
     @ManyToOne(() => UserEntite, user => user.queues)
     user: UserEntite;
 }

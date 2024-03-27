@@ -11,7 +11,6 @@ function AiChatBox() {
       try{
         const token_user = await checkAuth(Cookies.get('User_token'));
         const user = await getUser(token_user.username);
-        console.log(user)
         startConversation(user.username, user.email)
       }catch(error)
       {

@@ -19,11 +19,18 @@ const columns = [
       editable: true,
     },
     {
+        field: 'Your_Appointment_Date',
+        headerName: 'Date',
+        width: 250,
+        editable: true,
+      },
+    {
       field: 'problem',
       headerName: 'Discription',
       width: 350,
       editable: true,
     },
+
   ];
 
 export const AppointmentTable = () => {
