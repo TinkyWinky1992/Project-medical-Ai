@@ -42,6 +42,7 @@ export const AppointmentTable = () => {
             const user = await getUser(token_user.username);
             console.log(user);
             const appointments = await getFromDataBaseUserAppointments(user.username, user.email);
+            console.log(appointments)
             setRows(appointments);
         };
         fetchData();

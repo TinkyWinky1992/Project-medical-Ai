@@ -7,6 +7,3 @@ class AppointmentDate extends Date {
     id: number;
 }
 
-interface HashTable<T> {
-    [key: number]: T;
-}
