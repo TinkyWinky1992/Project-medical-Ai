@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
 import { checkAuth, getUser, getFromDataBaseUserAppointments } from "../Services/ServerHandler";
 import Cookies from "js-cookie";
 
@@ -27,13 +26,13 @@ const columns = [
     {
       field: 'problem',
       headerName: 'Discription',
-      width: 350,
+      width: 718,
       editable: true,
     },
 
   ];
 
-export const AppointmentTable = () => {
+  export const AppointmentTable = () => {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -49,26 +48,30 @@ export const AppointmentTable = () => {
     }, []);
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
-            <Box sx={{
-                '& .MuiDataGrid-columnHeader': {
-                    backgroundColor: 'rgba(255, 7, 0, 0.55)',
-                    width: '100%',
-                    display: 'black'
-                },
-            }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  height: '50vh' }}>
+            <div style={{ width: '79.2%' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
+                    sx={{
+                        '& .MuiDataGrid-columnHeader': {
+                            backgroundColor: 'rgba(0, 7, 0, 0.55)',
+                            color: 'white',
+                        },
+                        '& .MuiDataGrid-cell': {
+                            color: 'rgb(180, 180, 180)'
+                        }
+                    }}
                     initialState={{
                         pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
+                            paginationModel: { page: 0, pageSize: 5, outlineColor: 'black'},
                         },
                     }}
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                 />
-            </Box>
+            </div>
         </div>
     );
 };
+
