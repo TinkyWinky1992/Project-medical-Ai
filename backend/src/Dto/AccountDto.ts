@@ -21,3 +21,14 @@ export class ShortAccountDto {
     @IsNotEmpty()
     password: string;
 }
+
+export class AccoutWithNewDatails{
+    @IsNotEmpty()
+    id: number;
+
+    @IsNotEmpty()
+    new_email: string;
+
+    @IsNotEmpty()
+    new_username: string;
+}

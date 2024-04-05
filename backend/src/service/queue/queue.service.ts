@@ -64,15 +64,16 @@ export class QueueService {
 
   }
 
-  async findUserAppointment(username: string, email: string): Promise<any[]> { 
+  async findUserAppointment(id:number): Promise<any[]> { 
     const appointments = await this.queueRepository.find({
       where: {
-        username: username,
-        email: email
+        user:{ id: id}
       }
     });
     return appointments;
   }
+
+
   async deleteQueue(id: number) {
     try {
       await this.queueRepository.delete(id);
@@ -126,42 +127,3 @@ export class QueueService {
 
 
 }
-
-
-/*
-
-  assignDates(){
-    const currentDate: Date = new Date();
-    let max_day = 0
-    let max_month = 1;
-    let year = currentDate.getFullYear() % 100;
-
-    const temp_array = this.priorityQueue.getData()
-
-    for(let i = 0; i < temp_array.length; i++){
-      let day = currentDate.getDate() + max_day;
-      if(day > 31)
-      {
-        max_month++;
-        day = 1;
-      }
-      let month = currentDate.getMonth() + max_month
-      if(month > 12 ){
-        year++;
-      }
-      const formattedDate: string = `${day}/${month}/${currentDate.getFullYear() % 100}`;
-      const user: QueueParam = temp_array[i].data;
-  
-      let userAssinToDate: ExtendQueueParam = {
-        problem: user.problem,
-        level: user.level,
-        username: user.username,
-        email: user.email,
-        Your_Appointment_Date: formattedDate 
-      };
-
-      this.listQueue.push(userAssinToDate)
-      day++;
-    }
-  }
-*/

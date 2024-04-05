@@ -1,23 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm'
-import { UserEntite } from './user';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { UserEntite } from './user'; // Correct import path
 
-@Entity({name: "queue"})
+@Entity({ name: "queue" })
 export class QueueEntites {
 
-    @PrimaryGeneratedColumn({type:'bigint'})
+    @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
     @Column()
     level: number;
     
     @Column()
-    problem:string;
+    problem: string;
     
     @Column()
-    username: string
+    username: string;
 
     @Column()
-    email: string
+    email: string;
 
     @Column()
     Your_Appointment_Date: string;

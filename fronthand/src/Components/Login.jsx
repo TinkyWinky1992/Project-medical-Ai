@@ -28,6 +28,7 @@ const RenderLogin = () => {
       }catch(error) {
         if (error.response) {
           const mesg = error.response.data.message;
+          console.log(mesg)
           if(mesg == "User not found.") {
             input_email_username_ref.current.errormsg(mesg);
             input_email_username_ref.current.setValid(false);

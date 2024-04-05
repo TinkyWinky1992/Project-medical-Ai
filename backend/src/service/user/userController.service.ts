@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { AccountParam } from '../../types/AccountType';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../../Auth/Auth.service';
+import { AccoutWithNewDatails } from 'src/Dto/AccountDto';
+import { QueueEntites } from 'src/TypeOrm/entities/Queue';
 
 
 @Injectable()
@@ -12,7 +14,9 @@ export class UserControllerService {
   //get user repository from the database
   constructor(
     @InjectRepository(UserEntite)
-    private user_repository: Repository<UserEntite>, private AuthUser: AuthService
+    private user_repository: Repository<UserEntite>, private AuthUser: AuthService,
+    @InjectRepository(QueueEntites)
+    private queueRepository: Repository<QueueEntites>
   ) {}
 
   //creating user and put it in the user repository
@@ -39,10 +43,11 @@ export class UserControllerService {
     let user = new UserEntite();
 
     if (emailRegex.test(email_or_username)) 
-    user = await this.user_repository.findOne({ where: { email: email_or_username } });
+      user = await this.user_repository.findOne({ where: { email: email_or_username } });
   
     else 
       user = await this.user_repository.findOne({ where: { username: email_or_username } });
+
     if(user)
       return user;
 
@@ -68,6 +73,39 @@ export class UserControllerService {
       return {accsesToken: token.access_token}
     else 
       throw new Error('Authentication failed');
+
+  }
+
+
+  async updateUser(details: AccoutWithNewDatails,) {
+    try{
+      let user = new UserEntite();
+      
+      user = await this.user_repository.findOne({
+        where: {
+           id: details.id ,
+        },
+      });
+      user.username = details.new_username;
+      user.email = details.new_email;
+      await this.user_repository.save(user);
+      
+      let queue = new QueueEntites();
+      queue = await this.queueRepository.findOne({
+        where: {
+          user: {id: details.id}
+        }
+      });
+      queue.email = details.new_email;
+      queue.username = details.new_username;
+      await this.queueRepository.save(queue);
+
+      //queueRepository
+      
+
+    }catch(error){
+      console.log(error)
+    }
 
   }
 

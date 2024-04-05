@@ -1,8 +1,8 @@
 //
 import axios from "axios";
-export const getFromDataBaseUserAppointments = async(username, email) => {
+export const getFromDataBaseUserAppointments = async(id) => {
   try {
-    const response = await axios.get(`http://localhost:5000/queue/getAppointment?username=${username}&email=${email}`);
+    const response = await axios.get(`http://localhost:5000/queue/getAppointment?id=${id}`);
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -86,3 +86,21 @@ export const checkAuth = async (token) =>{
     throw error; // Rethrow the error for further handling if needed
   }
 }
+
+
+export const ChangeUserConfig = async (new_username, new_email, id) => {
+  try {
+    const response = await axios.post('http://localhost:5000/users/update', {
+      id: id,
+      new_email: new_email,
+      new_username: new_username
+    });
+    return response.data; 
+  } catch (error) {
+      console.error("Error message from server:", error.response.data.message);
+      throw error.response.data; 
+    } 
+} 
+
+
+

@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Param , Query, Body, UseGuards, Req, Delete} from '@nestjs/common';
+import { Controller, Get, Post, Param , Query, Body, UseGuards, Req, Delete, UseInterceptors, UploadedFile, Res, UploadedFiles} from '@nestjs/common';
 import { AuthGuard } from '../../Auth/userAuth.guards';
-import { AccountDto } from '../../Dto/AccountDto';
+import { AccountDto, AccoutWithNewDatails } from '../../Dto/AccountDto';
 import { UserControllerService } from '../../service/user/UserController.service';
 
 @Controller('users')
@@ -33,11 +33,15 @@ export class UsersController {
     
   }
 
-}
-  /*
-  @Delete(':id')
-  async deleteUser(@Param('id') id: number) {
-    await this.userService.deleteUser(id);
-
+  @Post('update')
+  async updateUserConfig(@Body() accout: AccoutWithNewDatails) {
+    try{
+      const savedUser = await this.userService.updateUser(accout);
+    }catch(error){
+      console.log(error)
+    }
+    
+ 
   }
-  */
+}
+

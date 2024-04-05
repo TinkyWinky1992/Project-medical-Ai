@@ -64,13 +64,11 @@ const InputUsernameField = forwardRef((props, ref) => {
     text: inputUserValue,
     inputText: setInputUserValue,
     label: setLabel,
-    
     errormsg: setErrormsg,
   }));
 
   return (
     <TextField
-      
       InputLabelProps={{ className: "userfield" }}
       label={label}
       style={{ padding: 10, color: "white"}}

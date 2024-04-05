@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle } from "react";
+import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect} from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import UserAnchor from "./Anchor";
@@ -14,7 +14,7 @@ import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { Tab, Tabs } from "@mui/material";
 import { main_pages, dialog_pages } from "../routing/routes";
 import Cookies from 'js-cookie';
-import { checkAuth } from "../Services/ServerHandler";
+import { checkAuth, getUser } from "../Services/ServerHandler";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,10 +22,36 @@ const darkTheme = createTheme({
   },
 });
 
+
 const MenuAppBar = forwardRef((props, ref) => {
   const userAnchor_ref = useRef();
   const [selectedPage, setSelectedPage] = useState(0);
   const navigate = useNavigate();
+
+
+  const [userAlt, setUserAlt] = useState("");
+
+  useEffect(() => {
+  
+    const UploadUserData = async () => {
+      try {
+        const token_user = await checkAuth(Cookies.get('User_token'));
+        const user = await getUser(token_user.username);
+        console.log(user.username)
+        setUserAlt(user.username)
+
+      } catch (error) {
+        console.log(error);
+        navigate(dialog_pages[1].route_url);
+      }
+    }
+
+    UploadUserData();
+  }, []);
+
+
+
+
 
   const handleAuthUser = async () => {
     try {  
@@ -108,7 +134,7 @@ const MenuAppBar = forwardRef((props, ref) => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton sx={{ p: 0 }} onClick={handleOpenUserDialog}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={userAlt} src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <UserAnchor ref={userAnchor_ref} />

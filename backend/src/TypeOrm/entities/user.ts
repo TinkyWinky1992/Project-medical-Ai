@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm'
 import { QueueEntites } from './Queue';
 
+
 @Entity({name: "users"})
 export class UserEntite {
     //numeric value that auto increments and auto generated
@@ -19,6 +20,7 @@ export class UserEntite {
 
     @OneToMany(() => QueueEntites, queue => queue.user)
     queues: QueueEntites[];
+
 
 
 }

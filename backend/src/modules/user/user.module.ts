@@ -10,10 +10,12 @@ import { UserControllerService } from '../../service/user/UserController.service
 import { AuthService } from '../../Auth/Auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../../Auth/Constants';
+import { QueueEntites } from 'src/TypeOrm/entities/Queue';
+import { CheckUserExistenceMiddleware } from 'src/middleware/UserMiddleware/userChangies.middleware';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ UserEntite ]),
+    TypeOrmModule.forFeature([ UserEntite, QueueEntites]),
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
@@ -28,6 +30,7 @@ export class UserModule {
     consumer.apply(UserRegisterMiddleware).forRoutes('users/create');
     consumer.apply(UserLoggerMiddleware).forRoutes('users');
     consumer.apply(UserLoginMiddleware).forRoutes({path: 'users/loginUser', method: RequestMethod.ALL});
+    consumer.apply(CheckUserExistenceMiddleware).forRoutes('users/update')
     
   }
 }

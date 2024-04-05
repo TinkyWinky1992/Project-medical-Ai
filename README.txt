@@ -8,6 +8,7 @@
 3. npm i -g @nestjs/cli
 npm install class-validator class-transformer
 npm i bcrypt
+npm install -D @types/multer
 
 4. npm install @mui/material @emotion/react @emotion/styled
 5. npm install @mui/material @mui/styled-engine-sc styled-components
