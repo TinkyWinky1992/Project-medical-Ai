@@ -11,9 +11,9 @@ export const getFromDataBaseUserAppointments = async(id) => {
 }
 
 
-export const startConversation = async (username, email) => {
+export const startConversation = async (username, email, id) => {
   try {
-    const response = await axios.get(`http://localhost:5001/?username=${username}&email=${email}`);
+    const response = await axios.get(`http://localhost:5001/?username=${username}&email=${email}&id=${id}`);
     console.log(response.data);
     return response.data;
   } catch (error) {

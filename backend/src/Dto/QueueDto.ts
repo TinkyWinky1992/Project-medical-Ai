@@ -13,5 +13,7 @@ export class QueueDto{
     @IsNotEmpty()
     email: string
     
+    @IsNotEmpty()
+    id: number
 
 }

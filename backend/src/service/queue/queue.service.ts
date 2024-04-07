@@ -43,15 +43,15 @@ export class QueueService {
     try{
       this.priorityQueue.insert(QueueDetails, +QueueDetails.level);
       this.assignDates()
-  
-      const user = await this.userRepository.findOneBy({ username: QueueDetails.username });
       await this.queueRepository.clear();
 
       for (const queueItem of this.listQueue) {
+        const user = await this.userRepository.findOneBy({ id: queueItem.id });
         console.log(queueItem.Your_Appointment_Date)
         const queue = this.queueRepository.create({...queueItem, user});
         await this.queueRepository.save(queue);
       }
+
       
       // Clear listQueue for the next assignment
       this.listQueue = [];
@@ -83,7 +83,7 @@ export class QueueService {
     }
   }
 
-  assignDates(){
+  async assignDates(){
     const currentDate: Date = new Date();
     let max_day = 0
     let max_month = 1;
@@ -114,6 +114,7 @@ export class QueueService {
         level: user.level,
         username: user.username,
         email: user.email,
+        id: user.id,
         Your_Appointment_Date: formattedDate 
       };
 
@@ -121,7 +122,6 @@ export class QueueService {
 
 
     }
-    
     
   }
 
