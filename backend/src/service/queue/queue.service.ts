@@ -64,14 +64,16 @@ export class QueueService {
 
   }
 
-  async findUserAppointment(id:number): Promise<any[]> { 
-    const appointments = await this.queueRepository.find({
-      where: {
-        user:{ id: id}
-      }
-    });
+  async findUserAppointment(id: number): Promise<any[]> {
+    console.log(id);
+    const appointments = await this.queueRepository.createQueryBuilder("queue")
+        .leftJoinAndSelect("queue.user", "user")
+        .where("user.id = :userId", { userId: id })
+        .getMany();
+    
+    console.log(appointments);
     return appointments;
-  }
+}
 
 
   async deleteQueue(id: number) {
@@ -114,7 +116,6 @@ export class QueueService {
         level: user.level,
         username: user.username,
         email: user.email,
-        id: user.id,
         Your_Appointment_Date: formattedDate 
       };
 

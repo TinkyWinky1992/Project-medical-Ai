@@ -3,7 +3,6 @@ export type QueueParam = {
     level: number;
     username: string;
     email: string
-    id: number
 }
 
 export type ExtendQueueParam = {
@@ -11,6 +10,5 @@ export type ExtendQueueParam = {
     level: number;
     username: string;
     email: string
-    id: number,
     Your_Appointment_Date: string
 }
