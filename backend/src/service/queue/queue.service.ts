@@ -45,17 +45,22 @@ export class QueueService {
       this.assignDates()
       await this.queueRepository.clear();
 
-      for (const queueItem of this.listQueue) {
-        const user = await this.userRepository.findOneBy({ id: queueItem.id });
-        console.log(queueItem.Your_Appointment_Date)
-        const queue = this.queueRepository.create({...queueItem, user});
-        await this.queueRepository.save(queue);
-      }
+        for (const queueItem of this.listQueue) {
+          const user = await this.userRepository.findOneBy({ id: queueItem.id });
+          console.log(queueItem.Your_Appointment_Date)
+          const queue = this.queueRepository.create({username: queueItem.username,
+                                                     email: queueItem.email,
+                                                     level: queueItem.level,
+                                                     problem: queueItem.problem,
+                                                     Your_Appointment_Date: queueItem.Your_Appointment_Date,
+                                                     user});
+          await this.queueRepository.save(queue);
+        }
 
       
       // Clear listQueue for the next assignment
-      this.listQueue = [];
-     return "Work";
+    this.listQueue = [];
+    return "Work";
       
     }catch(error){
       console.log(error)
@@ -66,10 +71,13 @@ export class QueueService {
 
   async findUserAppointment(id: number): Promise<any[]> {
     console.log(id);
-    const appointments = await this.queueRepository.createQueryBuilder("queue")
-        .leftJoinAndSelect("queue.user", "user")
-        .where("user.id = :userId", { userId: id })
-        .getMany();
+    const appointments = await this.queueRepository.find({
+      where:{
+        user:{
+          id: id
+        }
+      }
+    })
     
     console.log(appointments);
     return appointments;
@@ -116,7 +124,9 @@ export class QueueService {
         level: user.level,
         username: user.username,
         email: user.email,
-        Your_Appointment_Date: formattedDate 
+        Your_Appointment_Date: formattedDate,
+        id: user.id
+
       };
 
       this.listQueue.push(userAssinToDate)

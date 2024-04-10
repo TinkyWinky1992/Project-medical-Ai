@@ -40,6 +40,7 @@ const columns = [
             const token_user = await checkAuth(Cookies.get('User_token'));
             const user = await getUser(token_user.username);
             console.log(user);
+            console.log(user.id);
             const appointments = await getFromDataBaseUserAppointments(user.id);
             console.log(appointments)
             setRows(appointments);

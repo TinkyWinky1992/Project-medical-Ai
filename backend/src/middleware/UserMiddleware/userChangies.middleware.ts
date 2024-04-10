@@ -11,8 +11,7 @@ export class CheckUserExistenceMiddleware implements NestMiddleware {
 
     // Check if username already exists
     const usernameExists = await this.userService.isusernameExist(new_username);
-    console.log(usernameExists)
-    if (usernameExists) {
+    if (usernameExists  ) {
         throw new HttpException('Username already exists.', HttpStatus.BAD_REQUEST)
     }
 

@@ -24,6 +24,10 @@ export class UserService {
     return !!user;
   }
 
+  async isuserExistById(id: number): Promise<boolean> {
+    const user = await this.user_repository.findOneBy({ id: id });
+    return !!user;
+  }
   async comparePassword(password: string, incrypt_password: string): Promise<boolean> {
 
     const isMatch_password = await bcrypt.compare(password, incrypt_password);

@@ -13,11 +13,11 @@ import { QueueEntites } from 'src/TypeOrm/entities/Queue';
 
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.LOCAL_HOST,
-      port: parseInt(process.env.PORT_DATABASE),
-      username: process.env.USERNAME_DATABASE,
-      password: process.env.PASSWORD_DATABASE,
-      database: process.env.NAME_DATABASE,
+      host: "localhost",
+      port: 3306,
+      username: "root",
+      password: "admin",
+      database: "maindatabase",
       entities: [UserEntite,QueueEntites],
       synchronize: true,
     }),

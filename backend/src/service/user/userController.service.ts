@@ -79,6 +79,7 @@ export class UserControllerService {
 
   async updateUser(details: AccoutWithNewDatails,) {
     try{
+      console.log(details);
       let user = new UserEntite();
       
       user = await this.user_repository.findOne({
@@ -86,19 +87,24 @@ export class UserControllerService {
            id: details.id ,
         },
       });
+      console.log("userfound:", user);
       user.username = details.new_username;
       user.email = details.new_email;
       await this.user_repository.save(user);
       
-      let queue = new QueueEntites();
-      queue = await this.queueRepository.findOne({
+      let queuies = [];
+      queuies= await this.queueRepository.find({
         where: {
           user: {id: details.id}
         }
       });
-      queue.email = details.new_email;
-      queue.username = details.new_username;
-      await this.queueRepository.save(queue);
+      console.log(queuies);
+      for(const queueItem of queuies ){
+        queueItem.email = details.new_email;
+        queueItem.username = details.new_username;
+        await this.queueRepository.save(queueItem);
+      }
+
 
       //queueRepository
       

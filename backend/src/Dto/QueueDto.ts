@@ -1,4 +1,4 @@
-import {  IsNotEmpty } from "class-validator";
+import {  IsNotEmpty, isNotEmpty } from "class-validator";
 
 export class QueueDto{
     @IsNotEmpty()
@@ -12,5 +12,8 @@ export class QueueDto{
 
     @IsNotEmpty()
     email: string
+
+    @IsNotEmpty()
+    id: number
 
 }
